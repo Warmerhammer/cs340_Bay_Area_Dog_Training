@@ -1,5 +1,15 @@
 <html>
 
+[<a class="nav-item nav-link" href="Customers.html">Customers</a> |
+<a class="nav-item nav-link" href="Dogs.html">Dogs</a> |
+<a class="nav-item nav-link" href="Dog_has_Training_Session.html">Dog_has_Training_Session</a> |
+<a class="nav-item nav-link" href="Packages.html">Packages</a> |
+<a class="nav-item nav-link" href="Purchases.html">Purchases</a> |
+<a class="nav-item nav-link" href="Session_Types.html">Session_Types</a> |
+<a class="nav-item nav-link" href="Trainers.html">Trainers</a> |
+<a class="nav-item nav-link" href="Trainer_has_Training_Session.html">Trainer_has_Training_Sessions</a> |
+<a class="nav-item nav-link" href="Training_Sessions.html">Training_Sessions</a>]
+
 <head>
     <title>Dogs</title>
     <link href="style.css" rel="stylesheet" type="text/css" />
@@ -51,21 +61,12 @@
 <body onload="browsePeople()">
     <h1>Dogs</h1>
 
-    [ <a href="Customers.html">Customers</a> |
-    <a href="Dogs.html">Dogs</a> |
-    <a href="Dog_has_Training_Session.html">Dog_has_Training_Session</a> |
-    <a href="Packages.html">Packages</a> |
-    <a href="Purchases.html">Purchases</a> |
-    <a href="Session_Types.html">Session_Types</a> |
-    <a href="Dogs.html">Trainers</a> |
-    <a href="Trainer_has_Training_Sessions.html">Trainer_has_Training_Sessions</a> |
-    <a href="Training_Sessions.html">Training_Sessions</a> ]
-
     <div id="browse">
-        <p><a href="#" onClick="showAll()">Display all forms</a> </p>
+        <p><a href="#" onClick="showAll()">Browse Dogs</a> </p>
         <table border="1" cellpadding="5">
             <tr>
                 <th><a href="#" onClick="newDog()">New</a></th>
+                <th></th>
                 <th></th>
                 <th>id_dog</th>
                 <th>id_customer</th>
@@ -78,6 +79,7 @@
             <tr>
                 <td><a href="#" onClick="updateDog('this.DogID')">Edit</a></td>
                 <td><a href="#" onclick="deleteDog('this.DogID')">Delete</a></td>
+                <td><a href="#" onclick="deleteDog('this.DogID')">Training Sessions</a></td>
                 <td align="right">1</td>
                 <td align="right">2</td>
                 <td align="right">1</td>
@@ -89,6 +91,7 @@
             <tr>
                 <td><a href="#" onClick="updateDog('this.DogID')">Edit</a></td>
                 <td><a href="#" onclick="deleteDog('this.DogID')">Delete</a></td>
+                <td><a href="#" onclick="deleteDog('this.DogID')">Training Sessions</a></td>
                 <td align="right">2</td>
                 <td align="right">3</td>
                 <td align="right">1</td>
@@ -100,6 +103,7 @@
             <tr>
                 <td><a href="#" onClick="updateDog('this.DogID')">Edit</a></td>
                 <td><a href="#" onclick="deleteDog('this.DogID')">Delete</a></td>
+                <td><a href="#" onclick="deleteDog('this.DogID')">Training Sessions</a></td>
                 <td align="right">3</td>
                 <td align="right">1</td>
                 <td align="right">1</td>
@@ -111,6 +115,7 @@
             <tr>
                 <td><a href="#" onClick="updateDog('this.DogID')">Edit</a></td>
                 <td><a href="#" onclick="deleteDog('this.DogID')">Delete</a></td>
+                <td><a href="#" onclick="deleteDog('this.DogID')">Training Sessions</a></td>
                 <td align="right">4</td>
                 <td align="right">1</td>
                 <td align="right">1</td>

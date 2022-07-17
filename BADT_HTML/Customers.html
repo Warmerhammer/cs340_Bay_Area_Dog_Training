@@ -4,19 +4,18 @@
     <title>Customers</title>
     <link href="style.css" rel="stylesheet" type="text/css" />
 </head>
+[<a class="nav-item nav-link" href="Customers.html">Customers</a> |
+<a class="nav-item nav-link" href="Dogs.html">Dogs</a> |
+<a class="nav-item nav-link" href="Dog_has_Training_Session.html">Dog_has_Training_Session</a> |
+<a class="nav-item nav-link" href="Packages.html">Packages</a> |
+<a class="nav-item nav-link" href="Purchases.html">Purchases</a> |
+<a class="nav-item nav-link" href="Session_Types.html">Session_Types</a> |
+<a class="nav-item nav-link" href="Trainers.html">Trainers</a> |
+<a class="nav-item nav-link" href="Trainer_has_Training_Session.html">Trainer_has_Training_Sessions</a> |
+<a class="nav-item nav-link" href="Training_Sessions.html">Training_Sessions</a>]
 
 <body>
     <h1>Customers</h1>
-
-    [ <a href="Customers.html">Customers</a> |
-    <a href="Dogs.html">Dogs</a> |
-    <a href="Dog_has_Training_Session.html">Dog_has_Training_Session</a> |
-    <a href="Packages.html">Packages</a> |
-    <a href="Purchases.html">Purchases</a> |
-    <a href="Session_Types.html">Session_Types</a> |
-    <a href="Trainers.html">Trainers</a> |
-    <a href="Trainer_has_Training_Session.html">Trainer_has_Training_Sessions</a> |
-    <a href="Training_Sessions.html">Training_Sessions</a> ]
 
     <div id="browse" style="display: block">
         <p><strong>Browse Customers</strong></p>
@@ -31,8 +30,8 @@
                 <th>number of dogs enrolled</th>
             </tr>
             <tr>
-                <td><a href="#">Edit</a></td>
-                <td><a href="#">Delete</a></td>
+                <td><a href="#"></a></td>
+                <td><a href="#">Dogs Associated</a></td>
                 <td align="right">1</td>
                 <td>Bob Xavier</td>
                 <td align="right">xavier@123.com</td>
@@ -40,8 +39,8 @@
                 <td>2</td>
             </tr>
             <tr>
-                <td><a href="#">Edit</a></td>
-                <td><a href="#">Delete</a></td>
+                <td><a href="#"></a></td>
+                <td><a href="#">Dogs Associated</a></td>
                 <td align="right">2</td>
                 <td>Brittany Blaze</td>
                 <td align="right">bblaze@123.com</td>
@@ -49,8 +48,8 @@
                 <td>1</td>
             </tr>
             <tr>
-                <td><a href="#">Edit</a></td>
-                <td><a href="#">Delete</a></td>
+                <td><a href="#"></a></td>
+                <td><a href="#">Dogs Associated</a></td>
                 <td align="right">3</td>
                 <td>Tony Soprano</td>
                 <td align="right">tonys@gmail.com</td>
@@ -62,7 +61,7 @@
     </div> <!-- browse -->
     <div id="insert" style="display: block">
         <form id="addPlanet">
-            <legend><strong>Add Customer</strong></legend>
+            <legend><strong>Insert Customer</strong></legend>
             <fieldset class="fields">
                 <label> Name </label> <input type="text" name="name">
                 <label> email </label> <input type="text" name="email">
@@ -91,13 +90,25 @@
         </form>
     </div><!-- update -->
     <p>&nbsp;</p>
+    <div id="insert">
+        <form method="POST" id="addPlanet">
+            <legend><strong>Return Customer Purchases/Session Types</strong></legend>
+            <fieldset class="fields">
+                <label> Customer ID: </label> <input type="text" name="fname">
+                <label> Customer Name: </label> <input type="text" name="lname">
+            </fieldset>
+            <input class="btn" type="submit" id="addDog" value="Return Customer Information">
+            <input class="btn" type="button" value="cancel" onClick="browsePeople()">
+        </form>
+    </div>
+    <p>&nbsp;</p>
     <div id="delete" style="display: block">
         <form id="deletePlanet">
             <legend><strong>Delete Customer</strong></legend>
             <fieldset class="fields">
-                <p>Are you sure you wish to delete the following?</p>
-                <label>ID:</label> 1
-                <label> Name </label> Bob Xavier
+                <p>Are you sure you wish to delete the following customer?</p>
+                <label>ID:</label> <input>
+                <label> Name: </label><input>
 
             </fieldset>
             <input class="btn" type="submit" id="DeleteCustomer" value="Delete Customer">
