@@ -1,6 +1,7 @@
 <html>
 
-[<a class="nav-item nav-link" href="/">Customers</a> |
+[<a class="nav-item nav-link" href="/">Index</a> |
+<a class="nav-item nav-link" href="/">Customers</a> |
 <a class="nav-item nav-link" href="/Dogs">Dogs</a> |
 <a class="nav-item nav-link" href="/Dog_has_Training_Session">Dog_has_Training_Session</a> |
 <a class="nav-item nav-link" href="/Packages">Packages</a> |
@@ -131,11 +132,13 @@
         <form method="POST" id="addPlanet">
             <legend><strong>Add Dog</strong></legend>
             <fieldset class="fields">
-                <label> fully vaccinated </label> <input type="text" name="fname">
-                <label> temperament </label> <input type="text" name="lname">
-                <label> name </label> <input type="text" name="homeworld">
+                <label> id_dog </label> <input type="text" name="fname">
+                <label> id_customer </label> <input type="text" name="lname">
+                <label> fully_vaccinated </label> <input type="text" name="homeworld">
+                <label> temperament </label> <input type="text" name="age">
+                <label> name </label> <input type="text" name="age">
                 <label> age </label> <input type="text" name="age">
-                <label> age </label> <input type="text" name="age">
+                <label> breed </label> <input type="text" name="age">
             </fieldset>
             <input class="btn" type="submit" id="addDog" value="Add Dog">
             <input class="btn" type="button" value="cancel" onClick="browsePeople()">
@@ -146,11 +149,13 @@
         <form method="POST" id="UpdateDog">
             <legend><strong>Update Dog</strong></legend>
             <fieldset class="fields">
-                <label> fully vaccinated </label> <input type="text" name="fname">
-                <label> temperament </label> <input type="text" name="lname">
-                <label> name </label> <input type="text" name="homeworld">
+                <label> id_dog </label> <input type="text" name="fname">
+                <label> id_customer </label> <input type="text" name="lname">
+                <label> fully_vaccinated </label> <input type="text" name="homeworld">
+                <label> temperament </label> <input type="text" name="age">
+                <label> name </label> <input type="text" name="age">
                 <label> age </label> <input type="text" name="age">
-                <label> age </label> <input type="text" name="age">
+                <label> breed </label> <input type="text" name="age">
                 </select>
             </fieldset>
             <input class="btn" type="submit" id="UpdateSaveDog" value="Save Update Dog">

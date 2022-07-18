@@ -19,48 +19,44 @@ app.set('port', 3000);              // Set a port number at the top so it's easy
 /*
     ROUTES
 */
-app.get('/', function(req, res)                
-    {
-        res.sendFile(path.join(__dirname + '/Customers.html'));      
-    });                                         
 
-app.get('/Dogs', function(req, res)                
-{
+app.get('/', function(req, res) {
+    res.sendFile(path.join(__dirname + '/Index.html'));      
+}); 
+
+app.get('/Customers', function(req, res) {
+    res.sendFile(path.join(__dirname + '/Customers.html'));      
+});                                         
+
+app.get('/Dogs', function(req, res) {
     res.sendFile(path.join(__dirname + '/Dogs.html'));      
 });       
 
-app.get('/Dog_has_Training_Session', function(req, res)                
-{
+app.get('/Dog_has_Training_Session', function(req, res) {
     res.sendFile(path.join(__dirname + '/Dog_has_Training_Session.html'));      
 }); 
 
-app.get('/Packages', function(req, res)                
-{
+app.get('/Packages', function(req, res) {
     res.sendFile(path.join(__dirname + '/Packages.html'));      
 }); 
 
-app.get('/Purchases', function(req, res)                
-{
+app.get('/Purchases', function(req, res) {
     res.sendFile(path.join(__dirname + '/Purchases.html'));      
 }); 
 
-app.get('/Session_Types', function(req, res)                
-{
+app.get('/Session_Types', function(req, res) {
     res.sendFile(path.join(__dirname + '/Session_Types.html'));      
 }); 
 
-app.get('/Trainers', function(req, res)                
-{
+app.get('/Trainers', function(req, res) {
     res.sendFile(path.join(__dirname + '/Trainers.html'));      
 }); 
 
-app.get('/Trainer_has_Training_Session', function(req, res)                
-{
+app.get('/Trainer_has_Training_Session', function(req, res) {
     res.sendFile(path.join(__dirname + '/Trainer_has_Training_Session.html'));      
 }); 
 
-app.get('/Training_Sessions', function(req, res)                
-{
+app.get('/Training_Sessions', function(req, res) {
     res.sendFile(path.join(__dirname + '/Training_Sessions.html'));      
 }); 
 /*

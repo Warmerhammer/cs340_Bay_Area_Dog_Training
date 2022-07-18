@@ -1,6 +1,8 @@
 <html>
 
-[<a class="nav-item nav-link" href="/">Customers</a> |
+[
+<a class="nav-item nav-link" href="/">Index</a> |
+<a class="nav-item nav-link" href="/">Customers</a> |
 <a class="nav-item nav-link" href="/Dogs">Dogs</a> |
 <a class="nav-item nav-link" href="/Dog_has_Training_Session">Dog_has_Training_Session</a> |
 <a class="nav-item nav-link" href="/Packages">Packages</a> |
@@ -99,13 +101,12 @@
         <form method="POST" id="addPlanet">
             <legend><strong>Insert New Dog_has_Training_Session</strong></legend>
             <fieldset class="fields">
-                <label> fully vaccinated </label> <input type="text" name="fname">
-                <label> temperament </label> <input type="text" name="lname">
-                <label> name </label> <input type="text" name="homeworld">
-                <label> age </label> <input type="text" name="age">
-                <label> age </label> <input type="text" name="age">
+                <label> id_dog </label> <input type="text" name="fname">
+                <label> id_training_session </label> <input type="text" name="lname">
+                <label> customer feedback </label> <input type="text" name="homeworld">
+                </select>
             </fieldset>
-            <input class="btn" type="submit" id="addDog" value="Add Dog">
+            <input class="btn" type="submit" id="addDog" value="Insert New">
             <input class="btn" type="button" value="cancel" onClick="browsePeople()">
         </form>
     </div><!-- insert -->
@@ -114,14 +115,12 @@
         <form method="POST" id="UpdateDog">
             <legend><strong>Update Customer Feedback</strong></legend>
             <fieldset class="fields">
-                <label> fully vaccinated </label> <input type="text" name="fname">
-                <label> temperament </label> <input type="text" name="lname">
-                <label> name </label> <input type="text" name="homeworld">
-                <label> age </label> <input type="text" name="age">
-                <label> age </label> <input type="text" name="age">
+                <label> id_dog </label> <input type="text" name="fname">
+                <label> id_training_session </label> <input type="text" name="lname">
+                <label> customer feedback </label> <input type="text" name="homeworld">
                 </select>
             </fieldset>
-            <input class="btn" type="submit" id="UpdateSaveDog" value="Save Update Dog">
+            <input class="btn" type="submit" id="UpdateSaveDog" value="Update Feedback">
             <input class="btn" type="button" value="cancel" onClick="browsePeople()">
         </form>
     </div><!-- update -->
