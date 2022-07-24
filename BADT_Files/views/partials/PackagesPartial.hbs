@@ -154,9 +154,15 @@
         <form method="POST" id="addPlanet">
             <legend><strong>Insert New Package</strong></legend>
             <fieldset class="fields">
-                <label> id_package: </label> <input type="text" name="fname">
-                <label> id_session_type: </label> <input type="text" name="lname">
-                <label> package_sessions: </label> <input type="text" name="homeworld">
+                <label> id_session_type: </label> 
+                <select type="hidden" name="DogID" id="deleteDogID" value="1">
+                    <option>GROUP</option>
+                    <option value="">PUPPY</option>
+                    <option value="">PRIVATE</option>
+                </select>
+                <label> package_sessions: </label> 
+                <input type="text" name="age">
+                </select>
                 <label> sale_price: </label> <input type="text" name="age">
             </fieldset>
             <input class="btn" type="submit" id="addDog" value="Add Package">
@@ -171,7 +177,21 @@
             <fieldset class="fields">
                 <p>Are you sure you wish to delete the following?</p>
                 <input type="hidden" name="DogID" id="deleteDogID" value="1">
-                <label><strong> id_package: </strong><input type="text" name="homeworld"></label>
+                <label><strong> id_package: </strong>
+                 <select type="hidden" name="DogID" id="deleteDogID" value="1">
+                    <option value="">1</option>
+                    <option value="">2</option>
+                    <option value="">3</option>
+                    <option value="">4</option>
+                    <option value="">5</option>
+                    <option value="">6</option>
+                    <option value="">7</option>
+                    <option value="">8</option>
+                    <option value="">9</option>
+                    <option value="">10</option>
+                    <option value="">11</option>
+                    <option value="">12</option>
+                </select></label>
             </fieldset>
             <input class="btn" type="submit" id="DeleteDog" value="Delete Package">
             <input class="btn" type="button" value="cancel" onClick="browsePeople()">

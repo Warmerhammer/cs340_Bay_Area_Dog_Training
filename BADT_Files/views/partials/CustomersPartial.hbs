@@ -71,7 +71,12 @@
         <form id="updatePlanet">
             <legend><strong>Update Customer</strong></legend>
             <fieldset class="fields">
-                <label>ID:</label> 1
+                <label> ID: </label> 
+                <select type="hidden" name="DogID" id="deleteDogID" value="1">
+                    <option>1</option>
+                    <option value="">2</option>
+                    <option value="">3</option>
+                </select>
                 <label> Name </label> <input type="text" value="" name="name">
                 <label> email </label> <input type="text" name="population" value="">
                 <label> phone number </label> <input type="text" name="phone number" value="">
@@ -86,8 +91,11 @@
         <form method="POST" id="addPlanet">
             <legend><strong>Return Customer Purchases/Session Types</strong></legend>
             <fieldset class="fields">
-                <label> Customer ID: </label> <input type="text" name="fname">
-                <label> Customer Name: </label> <input type="text" name="lname">
+                <label> ID: </label> <select type="hidden" name="DogID" id="deleteDogID" value="1">
+                    <option>1</option>
+                    <option value="">2</option>
+                    <option value="">3</option>
+                </select>
             </fieldset>
             <input class="btn" type="submit" id="addDog" value="Return Customer Information">
             <input class="btn" type="button" value="cancel" onClick="browsePeople()">
@@ -99,8 +107,12 @@
             <legend><strong>Delete Customer</strong></legend>
             <fieldset class="fields">
                 <p>Are you sure you wish to delete the following customer?</p>
-                <label>ID:</label> <input>
-                <label> Name: </label><input>
+                <label>ID:</label> 
+                <select type="hidden" name="DogID" id="deleteDogID" value="1">
+                    <option>1</option>
+                    <option value="">2</option>
+                    <option value="">3</option>
+                </select>
 
             </fieldset>
             <input class="btn" type="submit" id="DeleteCustomer" value="Delete Customer">

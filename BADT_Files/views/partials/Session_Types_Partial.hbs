@@ -100,8 +100,12 @@
             <legend><strong>Delete Session Type</strong></legend>
             <fieldset class="fields">
                 <p>Are you sure you wish to delete the following?</p>
-                <input type="hidden" name="DogID" id="deleteDogID" value="1">
-                <label><strong> id_session_type: </strong><input type="text" name="homeworld"></label>
+                <label><strong>id_session_type: </strong></label>
+                <select type="hidden" name="DogID" id="deleteDogID" value="1">
+                    <option>GROUP</option>
+                    <option value="">PUPPY</option>
+                    <option value="">SINGLE</option>
+                </select>
 
             </fieldset>
             <input class="btn" type="submit" id="DeleteDog" value="Delete Session Type">

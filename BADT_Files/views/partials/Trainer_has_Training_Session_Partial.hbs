@@ -90,8 +90,18 @@
         <form method="POST" id="addPlanet">
             <legend><strong>Insert New Trainer_has_Training_Session</strong></legend>
             <fieldset class="fields">
-                <label> id_trainer </label> <input type="text" name="fname">
-                <label> id_training_sessions </label> <input type="text" name="lname">
+                <label><strong> id_trainer </strong></label>
+                <select type="hidden" name="DogID" id="deleteDogID" value="1">
+                    <option>1</option>
+                    <option value="">2</option>
+                    <option value="">3</option>
+                </select>
+                <label><strong> id_training_session: </strong>
+                <select type="hidden" name="DogID" id="deleteDogID" value="1">
+                    <option>GROUP</option>
+                    <option value="">PUPPY</option>
+                    <option value="">SINGLE</option>
+                </select>
             </fieldset>
             <input class="btn" type="submit" id="addDog" value="Insert New">
             <input class="btn" type="button" value="cancel" onClick="browsePeople()">

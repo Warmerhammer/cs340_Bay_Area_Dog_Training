@@ -97,10 +97,20 @@
         <form method="POST" id="addPlanet">
             <legend><strong>Insert New Purchase</strong></legend>
             <fieldset class="fields">
-                <label> id_purchase: </label> <input type="text" name="fname">
-                <label> id_customer: </label> <input type="text" name="lname">
-                <label> id_package: </label> <input type="text" name="homeworld">
                 <label> quantity: </label> <input type="text" name="age">
+                <label> id_customer: </label> 
+                <select type="hidden" name="DogID" id="deleteDogID" value="1">
+                    <option>1</option>
+                    <option value="">2</option>
+                    <option value="">3</option>
+                </select>
+                <label> id_package: </label> 
+                <select type="hidden" name="DogID" id="deleteDogID" value="1">
+                    <option>1</option>
+                    <option value="">2</option>
+                    <option value="">3</option>
+                </select>
+                
             </fieldset>
             <input class="btn" type="submit" id="addDog" value="New Purchase">
             <input class="btn" type="button" value="cancel" onClick="browsePeople()">

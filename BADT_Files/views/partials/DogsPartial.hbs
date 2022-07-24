@@ -116,11 +116,18 @@
         <form method="POST" id="addPlanet">
             <legend><strong>Add Dog</strong></legend>
             <fieldset class="fields">
-                <label> fully vaccinated </label> <input type="text" name="fname">
-                <label> temperament </label> <input type="text" name="lname">
-                <label> name </label> <input type="text" name="homeworld">
-                <label> age </label> <input type="text" name="age">
-                <label> age </label> <input type="text" name="age">
+                <label><strong> id_customer: </strong></label> 
+                <select type="hidden" name="DogID" id="deleteDogID" value="1">
+                    <option>1</option>
+                    <option value="">2</option>
+                    <option value="">3</option>
+                </select>
+                <label> fully vaccinated: </label> <input type="text" name="fname">
+                <label> temperament: </label> <input type="text" name="lname">
+                <label> name: </label> <input type="text" name="homeworld">
+                <label> age: </label> <input type="text" name="age">
+                <label> breed: </label> <input type="text" name="age">
+                
             </fieldset>
             <input class="btn" type="submit" id="addDog" value="Add Dog">
             <input class="btn" type="button" value="cancel" onClick="browsePeople()">
@@ -131,11 +138,24 @@
         <form method="POST" id="UpdateDog">
             <legend><strong>Update Dog</strong></legend>
             <fieldset class="fields">
-                <label> fully vaccinated </label> <input type="text" name="fname">
+                <label><strong> id_dog: </strong></label> 
+                <select type="hidden" name="DogID" id="deleteDogID" value="1">
+                    <option>1</option>
+                    <option value="">2</option>
+                    <option value="">3</option>
+                    <option value="">4</option>
+                </select>
+                <label><strong> id_customer: </strong></label> 
+                <select type="hidden" name="DogID" id="deleteDogID" value="1">
+                    <option>1</option>
+                    <option value="">2</option>
+                    <option value="">3</option>
+                </select>
+                <label> fully vaccinated: </label> <input type="text" name="fname">
                 <label> temperament </label> <input type="text" name="lname">
                 <label> name </label> <input type="text" name="homeworld">
                 <label> age </label> <input type="text" name="age">
-                <label> age </label> <input type="text" name="age">
+                <label> breed: </label> <input type="text" name="age">
                 </select>
             </fieldset>
             <input class="btn" type="submit" id="UpdateSaveDog" value="Save Update Dog">
@@ -149,8 +169,12 @@
             <fieldset class="fields">
                 <p>Are you sure you wish to delete the following?</p>
                 <input type="hidden" name="DogID" id="deleteDogID" value="1">
-                <label><strong> id_dog: </strong><input type="text" name="homeworld"></label>
-                <label> <strong> Name </strong><input type="text" name="homeworld"></label>
+                <label><strong> id_dog: </strong>
+                <select type="hidden" name="DogID" id="deleteDogID" value="1">
+                    <option>1</option>
+                    <option value="">2</option>
+                    <option value="">3</option>
+                </select>
 
             </fieldset>
             <input class="btn" type="submit" id="DeleteDog" value="Delete Dog">

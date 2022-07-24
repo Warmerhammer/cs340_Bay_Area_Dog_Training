@@ -103,9 +103,19 @@
         <form method="POST" id="UpdateDog">
             <legend><strong>Update Customer Feedback</strong></legend>
             <fieldset class="fields">
-                <label> id_dog </label> <input type="text" name="fname">
-                <label> id_training_session </label> <input type="text" name="lname">
-                <label> customer feedback </label> <input type="text" name="homeworld">
+                <label> id_dog: </label> 
+                <select type="hidden" name="DogID" id="deleteDogID" value="1">
+                    <option>1</option>
+                    <option value="">2</option>
+                    <option value="">3</option>
+                </select>
+                <label> id_training_session: </label> 
+                <select type="hidden" name="DogID" id="deleteDogID" value="1">
+                    <option>1</option>
+                    <option value="">2</option>
+                    <option value="">3</option>
+                </select>
+                <label> customer feedback: </label> <input type="text" name="homeworld">
                 </select>
             </fieldset>
             <input class="btn" type="submit" id="UpdateSaveDog" value="Update Feedback">
