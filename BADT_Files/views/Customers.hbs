@@ -1,11 +1,10 @@
-{{!--
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> --}}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 {{> navbarPartial}}
 
 <h1>Customers</h1>
 {{!-- Create a table --}}
-<table id="customers-table">
+<table id="customer-table" border="1" cellpadding="5">
 
     {{!-- Header section --}}
     <thead>
@@ -18,7 +17,11 @@
                 {{@key}}
             </th>
             {{/each}}
+            <th>
+                delete
+            </th>
         </tr>
+
     </thead>
 
     {{!-- Body section --}}
@@ -41,10 +44,10 @@
 
 <!-- /views/index.hbs -->
 
-{{!-- Form to add a record to the table --}}
-<h2>Adding Data with AJAX</h2>
-<p>To add a new customer, please enter their information below and click 'Submit'</p>
-<form id="add-customer-form-ajax">
+{{!-- Form to add a customer to the table --}}
+<h2>Add A Customer</h2>
+<p>To add a new customer, please enter their information below and click 'Add Customer'</p>
+<form method="POST" id="add-customer-form" action="/add-customer-form">
     <label for="input-name">Name: </label>
     <input type="text" name="input-name" id="input-name">
 
@@ -52,13 +55,14 @@
     <input type="text" name="input-email" id="input-email">
 
     <label for="input-phone_number">Phone Number: </label>
-    <input type="text" name="input-phone_number" id="input-phone_number">
+    <input type="text" name="input-phone-number" id="input-phone-number">
 
     <label for="input-dogs_enrolled">Dogs Enrolled: </label>
-    <input type="text" name="input-dogs_enrolled" id="input-dogs_enrolled">
+    <input type="number" name="input-dogs-enrolled" id="input-dogs-enrolled">
 
-    <input type="submit">
+    <input type="submit" value="Add Customer">
 </form>
 
 {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
-<script src="./js/add_customer.js"></script>
+{{!--
+<script src="./js/add_customer.js"></script> --}}

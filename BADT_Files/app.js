@@ -9,7 +9,7 @@ var app = express();
 
 // Database
 var db = require('./database/db-connector')
-const PORT = 52529;
+const PORT = 52521;
 
 // Serve static assets
 app.use(express.static(path.join(__dirname, 'public')));
@@ -71,49 +71,27 @@ app.get('/Training_Sessions', function (req, res) {
 // POST ROUTES
 
 // POST Route for inserting new Customer to Customers table
-app.post('/add-customer-ajax', function (req, res) {
-    // Capture the incoming data and parse it back to a JS object
+app.post('/add-customer-form', function (req, res) {
     let data = req.body;
 
-    // Capture NULL values
-    let numberOfDogs = parseInt(data.number_of_dogs_enrolled);
-    if (isNaN(numberOfDogs)) {
-        numberOfDogs = 'NULL'
+    let number_of_dogs_enrolled = parseInt(data['input-dogs-enrolled']);
+    if (isNaN(number_of_dogs_enrolled)) {
+        number_of_dogs_enrolled = 'NULL'
     }
 
-    // let phone_number = parseInt(data.phone_number);
-    // if (isNaN(phone_number)) {
-    //     phone_number = 'NULL'
-    // }
+    query1 = `INSERT INTO Customers(name, email, phone_number, 
+    number_of_dogs_enrolled) VALUES ('${data['input-name']}', 
+    '${data['input-email']}', '${data['input-phone-number']}', 
+    '${number_of_dogs_enrolled}')`
 
-    // Create the query and run it on the database
-    query1 = `INSERT INTO Customers (name, email, phone_number, number_of_dogs_enrolled) VALUES ('${data.name}', '${data.email}', '${data.phone_number}', ${data.number_of_dogs_enrolled})`;
     db.pool.query(query1, function (error, rows, fields) {
-
-        // Check to see if there was an error
         if (error) {
-
-            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
-            console.log(error)
+            console.log(error);
             res.sendStatus(400);
         }
+
         else {
-            // If there was no error, perform a SELECT * on bsg_people
-            query2 = `SELECT * FROM Customers;`;
-            db.pool.query(query2, function (error, rows, fields) {
-
-                // If there was an error on the second query, send a 400
-                if (error) {
-
-                    // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
-                    console.log(error);
-                    res.sendStatus(400);
-                }
-                // If all went well, send the results of the query back.
-                else {
-                    res.send(rows);
-                }
-            })
+            res.redirect('/Customers')
         }
     })
 });
@@ -121,13 +99,10 @@ app.post('/add-customer-ajax', function (req, res) {
 // DELETE ROUTES
 
 //DELETE Route for deleting Customer from Customer table
-app.delete('/delete-customer-ajax/', function (req, res, next) {
+app.delete('/delete-customer', function (req, res, next) {
     let data = req.body;
     let customerID = parseInt(data.id_customer);
-    let deleteCustomers = `DELETE FROM Customers WHERE id_customer = ${customerID}`;
-    // let deleteBsg_People= `DELETE FROM bsg_people WHERE id = ?`;
-
-
+    let deleteCustomers = `DELETE FROM Customers WHERE id_customer = ?`;
     // Run the 1st query
     db.pool.query(deleteCustomers, [customerID], function (error, rows, fields) {
         if (error) {
@@ -137,16 +112,9 @@ app.delete('/delete-customer-ajax/', function (req, res, next) {
             res.sendStatus(400);
         }
 
-        // else {
-        //     // Run the second query
-        //     db.pool.query(deleteBsg_People, [customerID], function (error, rows, fields) {
-
-        //         if (error) {
-        //             console.log(error);
-        //             res.sendStatus(400);
-        //         } else {
-        //             res.sendStatus(204);
-        //         }
+        else {
+            res.sendStatus(204);
+        }
     })
 });
 

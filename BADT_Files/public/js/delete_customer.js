@@ -1,67 +1,33 @@
-// function deleteCustomer(customerID) {
-//     let link = '/delete-customer-ajax/';
-//     let data = {
-//         id: customerID
-//     };
 
-//     $.ajax({
-//         url: link,
-//         type: 'DELETE',
-//         data: JSON.stringify(data),
-//         contentType: "application/json; charset=utf-8",
-//         success: function (result) {
-//             deleteRow(customerID);
-//         }
-//     });
-// }
-
-// function deleteRow(customerID) {
-//     let table = document.getElementById("customers-table");
-//     for (let i = 0, row; row = table.rows[i]; i++) {
-//         if (table.rows[i].getAttribute("data-value") == customerID) {
-//             table.deleteRow(i);
-//             break;
-//         }
-//     }
-// };
-
-function deleteCustomer(personID) {
-    // Put our data we want to send in a javascript object
+// code for deletePerson function using jQuery
+function deleteCustomer(id_customer) {
+    let link = '/delete-customer';
     let data = {
-        id: personID
+        id_customer: id_customer
     };
 
-    // Setup our AJAX request
-    var xhttp = new XMLHttpRequest();
-    xhttp.open("DELETE", "/delete-customer-ajax", true);
-    xhttp.setRequestHeader("Content-type", "application/json");
-
-    // Tell our AJAX request how to resolve
-    xhttp.onreadystatechange = () => {
-        if (xhttp.readyState == 4 && xhttp.status == 204) {
-
-            // Add the new data to the table
-            deleteRow(personID);
-
+    $.ajax({
+        url: link,
+        type: 'DELETE',
+        data: JSON.stringify(data),
+        contentType: "application/json; charset=utf-8",
+        success: function (result) {
+            deleteRow(id_customer);
         }
-        else if (xhttp.readyState == 4 && xhttp.status != 204) {
-            console.log("There was an error with the input.")
-        }
-    }
-    // Send the request and wait for the response
-    xhttp.send(JSON.stringify(data));
+    });
 }
 
 
-function deleteRow(personID) {
-
-    let table = document.getElementById("customers-table");
+function deleteRow(id_customer) {
+    let table = document.getElementById("customer-table");
+    console.log('id_customer: ', id_customer)
     for (let i = 0, row; row = table.rows[i]; i++) {
         //iterate through rows
         //rows would be accessed using the "row" variable assigned in the for loop
-        if (table.rows[i].getAttribute("data-value") == personID) {
+        if (table.rows[i].getAttribute("data-value") == id_customer) {
             table.deleteRow(i);
             break;
         }
     }
+    location.reload()
 }

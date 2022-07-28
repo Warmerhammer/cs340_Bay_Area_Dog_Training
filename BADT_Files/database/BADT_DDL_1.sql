@@ -149,7 +149,7 @@ CREATE TABLE `Purchases` (
   UNIQUE KEY `id_purchase` (`id_purchase`),
   KEY `fk_Purchases_Customers1` (`id_customer`),
   KEY `fk_Purchases_Packages1` (`id_package`),
-  CONSTRAINT `fk_Purchases_Customers1` FOREIGN KEY (`id_customer`) REFERENCES `Customers` (`id_customer`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Purchases_Customers1` FOREIGN KEY (`id_customer`) REFERENCES `Customers` (`id_customer`) ON DELETE SET NULL,
   CONSTRAINT `fk_Purchases_Packages1` FOREIGN KEY (`id_package`) REFERENCES `Packages` (`id_package`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
