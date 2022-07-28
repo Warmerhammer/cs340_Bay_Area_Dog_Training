@@ -1,2 +1,64 @@
-{{>navbarPartial}}
-{{>CustomersPartial}}
+{{!--
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> --}}
+
+{{> navbarPartial}}
+
+<h1>Customers</h1>
+{{!-- Create a table --}}
+<table id="customers-table">
+
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the id, name, email, phone number and number of dogs enrolled, in order --}}
+        {{#each data}}
+        <tr>
+            <td>{{this.id_customer}}</td>
+            <td>{{this.name}}</td>
+            <td>{{this.email}}</td>
+            <td>{{this.phone_number}}</td>
+            <td>{{this.number_of_dogs_enrolled}}</td>
+            <td><button onclick="deleteCustomer({{this.id_customer}})">Delete</button></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<script src="./js/delete_customer.js"></script>
+
+<!-- /views/index.hbs -->
+
+{{!-- Form to add a record to the table --}}
+<h2>Adding Data with AJAX</h2>
+<p>To add a new customer, please enter their information below and click 'Submit'</p>
+<form id="add-customer-form-ajax">
+    <label for="input-name">Name: </label>
+    <input type="text" name="input-name" id="input-name">
+
+    <label for="input-email">Email: </label>
+    <input type="text" name="input-email" id="input-email">
+
+    <label for="input-phone_number">Phone Number: </label>
+    <input type="text" name="input-phone_number" id="input-phone_number">
+
+    <label for="input-dogs_enrolled">Dogs Enrolled: </label>
+    <input type="text" name="input-dogs_enrolled" id="input-dogs_enrolled">
+
+    <input type="submit">
+</form>
+
+{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+<script src="./js/add_customer.js"></script>
