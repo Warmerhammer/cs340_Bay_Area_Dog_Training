@@ -114,10 +114,58 @@ app.delete('/delete-customer', function (req, res, next) {
 
         else {
             res.sendStatus(204);
+
         }
     })
 });
 
+// UPDATE (PUT) ROUTES
+
+//PUT Route for updating a Customer in the Customer table
+app.put('/put-customer-ajax', function (req, res, next) {
+    let data = req.body;
+
+    let id = parseInt(data.id_customer);
+    // let name = parseInt(data['name']);
+    // // if (isNaN(name)) {
+    // //     name = 'NULL'
+    // // }
+    // console.log('name: ', data['name'])
+    // let email = parseInt(data['input-email-update']);
+    // // if (isNaN(email)) {
+    // //     email = 'NULL'
+    // // }
+    // let phoneNumber = parseInt(data['input-phone-number-update']);
+    // // if (isNaN(phoneNumber)) {
+    // //     phoneNumber = 'NULL'
+    // // }
+    let dogsEnrolled = parseInt(data.number_of_dogs_enrolled);
+
+    let queryCustomer = `UPDATE Customers SET name = '${data['name']}', email = '${data['email']}', phone_number = '${data['phone_number']}', number_of_dogs_enrolled = ${dogsEnrolled} WHERE id_customer = ${id}`;
+    let selectCustomer = `SELECT * FROM Customers WHERE id_customer = ${id}`
+
+    // Run the 1st query
+    db.pool.query(queryCustomer, function (error, rows, fields) {
+        if (error) {
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error);
+            res.sendStatus(400);
+        }
+        // If there was no error, we run our second query and return that data so we can use it to update the customer's
+        // table on the front-end
+        else {
+            // Run the second query
+            db.pool.query(selectCustomer, function (error, rows, fields) {
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400);
+                } else {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
 
 // LISTENER
 
