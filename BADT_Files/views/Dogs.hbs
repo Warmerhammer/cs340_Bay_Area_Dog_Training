@@ -1,2 +1,98 @@
 {{>navbarPartial}}
-{{>DogsPartial}}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<h1>Dogs</h1>
+{{!-- Create a table --}}
+<table id="dog-table" border="1" cellpadding="5">
+
+  {{!-- Header section --}}
+  <thead>
+    <tr>
+      <th>
+        customer
+      </th>
+      <th>
+        id_dog
+      </th>
+      <th>
+        name
+      </th>
+      <th>
+        age
+      </th>
+      <th>
+        breed
+      </th>
+      <th>
+        temperament
+      </th>
+      <th>
+        vaccinated
+      </th>
+      <th>
+        update
+      </th>
+      <th>
+        delete
+      </th>
+    </tr>
+
+  </thead>
+
+  {{!-- Body section --}}
+  <tbody>
+
+    {{!-- For each row, print the id, name, email, phone number and number of dogs enrolled, in order --}}
+    {{#each data}}
+    <tr>
+      <td>{{this.customer}}</td>
+      <td>{{this.id_dog}}</td>
+      <td>{{this.name}}</td>
+      <td>{{this.age}}</td>
+      <td>{{this.breed}}</td>
+      <td>{{this.temperament}}</td>
+      <td>{{this.vaccinated}}</td>
+      <td><button onclick="showUpdateForm({{this.id_dog}})">Update</button></td>
+      <td><button onclick="deleteDog({{this.id_dog}})">Delete</button></td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+<script src=" ./js/delete_dog.js"></script>
+<script src=".js/update_dog.js"></script>
+
+<!-- /views/index.hbs -->
+
+{{!-- Form to add a dog to the table --}}
+<h2>Add A Dog</h2>
+<p>To add a dog, please complete the form below and click 'Add Dog'</p>
+<form method="POST" id="add-dog-form" action="/add-dog-form">
+  <label for="customer">Customer: </label>
+  <select name="customer" id="customer">
+    <option value="select-customer">Customer...</option>
+    {{#each customers}}
+    <option value="{{this.id_customer}}">{{this.name}}</option>
+    {{/each}}
+  </select>
+
+  <label for="input-name">Name: </label>
+  <input type="text" name="input-name" id="input-name">
+
+  <label for="input-age">Age: </label>
+  <input type="text" name="input-age" id="input-age">
+
+  <label for="input-breed">Breed: </label>
+  <input type="text" name="input-breed" id="input-breed">
+
+  <label for="input-temperament">Temperament: </label>
+  <input type="text" name="input-temperament" id="input-temperament">
+
+  <label for="input-vaccinated">Vaccinated: </label>
+  <select name="input-vaccinated" id="input-vaccinated">
+    <option value="select-vaccinated">Vaccinated...</option>
+    <option value="Y">Y</option>
+    <option value="N">N</option>
+  </select>
+
+  <input type="submit" value="Add Dog">
+</form>
