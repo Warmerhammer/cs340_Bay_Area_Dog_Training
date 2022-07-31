@@ -1,2 +1,96 @@
-{{>navbarPartial}}
-{{>Session_Types_Partial}}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<div style="text-align: center; display: flex; flex-direction: column; margin: 0 300px;">
+  {{>navbarPartial}}
+
+  <h1 style="margin-top: 50px;">Session Types</h1>
+
+  <table id="session-types-table" border="1" cellpadding="5">
+    {{!-- Header section --}}
+    <thead>
+      <tr>
+        <th><button onClick="showAddPackage()">Add</button></th>
+        <th></th>
+        <th>
+          id_session_type
+        </th>
+        <th>
+          max_capacity
+        </th>
+        <th>
+          delete
+        </th>
+      </tr>
+
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+      {{#each data}}
+      <tr>
+        <td></td>
+        <td></td>
+        <td>{{this.id_session_type}}</td>
+        <td>{{this.max_capacity}}</td>
+        <td><button onClick="showDeleteForm(`{{this.id_session_type}}`)">Delete</button></td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+
+  <p>&nbsp;</p>
+
+  <div id="add-session-type-block">
+    <form id="add-session-type-form">
+      <fieldset>
+        <legend><strong>Insert New Session Type</strong></legend>
+        <br>
+        <span>Please fill in the information below:</span>
+        <br><br>
+        <label><strong>Session Type:</strong> </label>
+        <br>
+        <input type="text" id="add-session-type" name="add-session-type">
+        <br><br>
+        <label><strong>Max Capacity:</strong></label>
+        <br>
+        <input type="number" id="add-max-capacity" name="add-max-capacity">
+        <br><br>
+        <button type="submit" id="button-add-session-type">Click to Add</button>
+      </fieldset>
+    </form>
+  </div><!-- insert -->
+
+  <div id="delete-session-type-block" style="display: none; margin: auto;">
+    <form id="delete-session-type-table">
+      <fieldset style="text-align: center;">
+        <legend><strong>Confirm Deletion</strong></legend>
+        <br>
+        <span>Are you sure you wish to delete the following?</span>
+        <br><br>
+        <table id="delte-session-types-table" border="1" cellpadding="5">
+          <thead>
+            <tr>
+              <th>
+                id_session_type
+              </th>
+              <th>
+                max_capacity
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td id="td-delete-id-session-type"></td>
+              <td id="td-delete-max-capacity"></td>
+            </tr>
+          </tbody>
+        </table>
+        <br><br>
+        <button type="submit" id="button-delete-session-type">Click to Delete</button>
+      </fieldset>
+    </form>
+  </div><!-- delete -->
+</div>
+
+<script src="./js/session_types/add_session_type.js"></script>
+<script src="./js/session_types/delete_session_type.js"></script>

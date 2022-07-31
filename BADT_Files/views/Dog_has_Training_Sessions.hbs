@@ -1,0 +1,165 @@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+<div style="text-align: center; display: flex; flex-direction: column; margin: 0 300px;">
+  {{>navbarPartial}}
+
+  <h1 style="margin-top: 50px;">Dog Training Sessions (intersection table) </h1>
+  <table border="1" cellpadding="5">
+    <thead>
+      <tr>
+        <th><button onclick="showAddDhts()">Add</button></th>
+        <th></th>
+        <th>id_dog</th>
+        <th>dog_name</th>
+        <th></th>
+        <th>id_training_session</th>
+        <th>date_scheduled</th>
+        <th>session_type</th>
+        <th>
+        </th>
+        <th>
+          customer_feedback
+        </th>
+        <th>
+          edit feedback
+        </th>
+        <th>
+          remove dog from session
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {{#each data}}
+      <tr>
+        <td></td>
+        <td></td>
+        <td>{{this.id_dog}}</td>
+        <td>{{this.dog_name}}</td>
+        <td></td>
+        <td>{{this.id_training_session}}</td>
+        <td>{{this.ts_date}}</td>
+        <td>{{this.ts_type}}</td>
+        <td></td>
+        <td>{{this.customer_feedback}}</td>
+        <td><button onClick="showUpdateDHTS({{this.id_dog}}, {{this.id_training_session}})">Edit</button></td>
+        <td><button onClick="showDeleteDHTS({{this.id_dog}}, {{this.id_training_session}})">Remove</button></td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+  <!-- browse -->
+
+  <p>&nbsp;</p>
+
+  <div id="add-dhts-block" style="justify-content: center;">
+    <form id="add-dhts-form">
+      <fieldset class="fields">
+        <legend><strong>Schedule Dog for Training Session</strong></legend>
+        <span>Please ensure dog is in correct age group</span>
+        <br><br>
+        <label for="select-add-dhts-dog-name"><strong>Dog Name: </strong></label>
+        <br>
+        <select name="select-add-dhts-dog-name" id="select-add-dhts-dog-name">
+          <option value="select-dog">Dog...</option>
+          {{#each dogs}}
+          <option value="{{this.id_dog}}">{{this.name}}</option>
+          {{/each}}
+        </select>
+
+        <br><br>
+
+        <label for="select-add-dhts-training-session"><strong>Training Session: </strong></label>
+        <br>
+        <select name="select-add-dhts-training-session" id="select-add-dhts-training-session">
+          <option value="select-ts">Training Session...</option>
+          {{#each training_sessions}}
+          <option value="{{this.id_training_session}}">{{this.id_session_type}} : {{this.date_scheduled}}</option>
+          {{/each}}
+        </select>
+
+        <br><br>
+
+        <label><strong>Customer Feedback:</strong></label>
+        <br>
+        <textarea id="input-customer-feedback" name="input-customer-feedback" rows="2" cols="60"></textarea>
+
+        <br><br>
+
+        <button type="submit" id="button-add-dhts">Create New Dog Has Training Session</button>
+
+      </fieldset>
+    </form>
+  </div><!-- insert -->
+
+  <div id="update-dhts-block" style="display: none;">
+    <form method="POST" id="update-dhts-form">
+      <fieldset>
+        <legend><strong>Customize Feedback</strong></legend>
+        <br>
+        <span>Please the feedback below:</span>
+        <br><br>
+        <label for="update-dhts-dog"><strong>Dog ID (read only): </strong></label>
+        <input id="update-dhts-dog" readonly>
+        <br><br>
+        <label for="update-dhts-session"><strong>Training Session ID (read only):</strong></label>
+        <input id="update-dhts-session" readonly>
+        <br><br>
+        <label for="textarea-update-dhts"><strong>Update Feedback: </strong></label>
+        <br>
+        <textarea id="textarea-update-dhts" rows="4" cols="50"></textarea>
+        <br><br>
+        <button type="submit">Submit Feedback</button>
+
+    </form>
+    </fieldset>
+  </div><!-- update -->
+
+  <div id="delete-dhts-block" style="display: none; margin: 0 auto;">
+    <fieldset>
+      <legend>Confirm Deletion</legend>
+      <br>
+      <span>Are you sure you want to delete?</span>
+      <br><br>
+      <table id="delete-dhts-table" border="1" cellpadding="5">
+        <thead>
+          <tr>
+            <th>id_dog</th>
+            <th>dog_name</th>
+            <th></th>
+            <th>id_training_session</th>
+            <th>date_scheduled</th>
+            <th>session_type</th>
+            <th>
+            </th>
+            <th>
+              customer_feedback
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td id="td-delete-dhts-id-dog"></td>
+            <td id="td-delete-dhts-dog-name"></td>
+            <td></td>
+            <td id="td-delete-dhts-id-training-session"></td>
+            <td id="td-delete-dhts-tsDate"></td>
+            <td id="td-delete-dhts-tsType"></td>
+            <td></td>
+            <td id="td-delete-dhts-customer-feedback"></td>
+          </tr>
+        </tbody>
+      </table>
+      <br><br>
+      <button type="submit" id="button-dhts-delete">Click to Delete</button>
+    </fieldset>
+  </div><!-- delete -->
+</div>
+
+</body>
+
+<script src="./js/dhts/add_dhts.js"></script>
+<script src="./js/dhts/update_dhts.js"></script>
+<script src="./js/dhts/delete_dhts.js"></script>

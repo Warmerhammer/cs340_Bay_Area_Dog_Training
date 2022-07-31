@@ -1,98 +1,235 @@
-{{>navbarPartial}}
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-<h1>Dogs</h1>
-{{!-- Create a table --}}
-<table id="dog-table" border="1" cellpadding="5">
 
-  {{!-- Header section --}}
-  <thead>
-    <tr>
-      <th>
-        customer
-      </th>
-      <th>
-        id_dog
-      </th>
-      <th>
-        name
-      </th>
-      <th>
-        age
-      </th>
-      <th>
-        breed
-      </th>
-      <th>
-        temperament
-      </th>
-      <th>
-        vaccinated
-      </th>
-      <th>
-        update
-      </th>
-      <th>
-        delete
-      </th>
-    </tr>
 
-  </thead>
 
-  {{!-- Body section --}}
-  <tbody>
+<div style="text-align: center; display: flex; flex-direction: column; margin: 0 300px;">
+  {{> navbarPartial}}
 
-    {{!-- For each row, print the id, name, email, phone number and number of dogs enrolled, in order --}}
-    {{#each data}}
-    <tr>
-      <td>{{this.customer}}</td>
-      <td>{{this.id_dog}}</td>
-      <td>{{this.name}}</td>
-      <td>{{this.age}}</td>
-      <td>{{this.breed}}</td>
-      <td>{{this.temperament}}</td>
-      <td>{{this.vaccinated}}</td>
-      <td><button onclick="showUpdateForm({{this.id_dog}})">Update</button></td>
-      <td><button onclick="deleteDog({{this.id_dog}})">Delete</button></td>
-    </tr>
-    {{/each}}
-  </tbody>
-</table>
-<script src=" ./js/delete_dog.js"></script>
-<script src=".js/update_dog.js"></script>
 
-<!-- /views/index.hbs -->
+  <form id="search-dog" method="GET" action="/Dogs" style="text-align: center; margin-top: 50px;">
+    <legend><strong>Search By Dog Name</strong></legend>
+    <br>
+    <textarea id="search-box" name="dname" cols="70" row="1"></textarea>
+    <br><br>
+    <button id="dog-search-button" type="submit">Search</button>
+    <a href="/Dogs"><button>Clear</button></a>
 
-{{!-- Form to add a dog to the table --}}
-<h2>Add A Dog</h2>
-<p>To add a dog, please complete the form below and click 'Add Dog'</p>
-<form method="POST" id="add-dog-form" action="/add-dog-form">
-  <label for="customer">Customer: </label>
-  <select name="customer" id="customer">
-    <option value="select-customer">Customer...</option>
-    {{#each customers}}
-    <option value="{{this.id_customer}}">{{this.name}}</option>
-    {{/each}}
-  </select>
 
-  <label for="input-name">Name: </label>
-  <input type="text" name="input-name" id="input-name">
+  </form>
 
-  <label for="input-age">Age: </label>
-  <input type="text" name="input-age" id="input-age">
+  <h1 style="margin-top: 50px;">Dogs Table</h1>
+  <table id="dog-table" border="1" cellpadding="5">
+    {{!-- Header section --}}
+    <thead>
+      <tr>
+        <th><button onClick="showAddDog()">Add</button></th>
+        <th></th>
+        <th>
+          id_dog
+        </th>
+        <th>
+          name
+        </th>
+        <th>
+          age
+        </th>
+        <th>
+          breed
+        </th>
+        <th>
+          temperament
+        </th>
+        <th>
+          vaccinated
+        </th>
+        <th>
+          update
+        </th>
+        <th>
+          delete
+        </th>
+        <th></th>
+        <th>
+          customer
+        </th>
+      </tr>
 
-  <label for="input-breed">Breed: </label>
-  <input type="text" name="input-breed" id="input-breed">
+    </thead>
 
-  <label for="input-temperament">Temperament: </label>
-  <input type="text" name="input-temperament" id="input-temperament">
+    {{!-- Body section --}}
+    <tbody>
+      {{#each data}}
+      <tr>
+        <td></td>
+        <td></td>
+        <td>{{this.id_dog}}</td>
+        <td>{{this.name}}</td>
+        <td>{{this.age}}</td>
+        <td>{{this.breed}}</td>
+        <td>{{this.temperament}}</td>
+        <td>{{this.vaccinated}}</td>
+        <td><button onclick="showUpdateForm({{this.id_dog}})">Update</button></td>
+        <td><button onclick="showDeleteForm({{this.id_dog}})">Delete</button></td>
+        <td></td>
+        <td>{{this.customer}}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
 
-  <label for="input-vaccinated">Vaccinated: </label>
-  <select name="input-vaccinated" id="input-vaccinated">
-    <option value="select-vaccinated">Vaccinated...</option>
-    <option value="Y">Y</option>
-    <option value="N">N</option>
-  </select>
+  <br>
 
-  <input type="submit" value="Add Dog">
-</form>
+  {{!-- Form to add a dog to the table --}}
+  <div id="add-dog-block">
+    <form id="add-dog-form">
+      <fieldset>
+        <legend><strong>Add a Dog</strong></legend>
+        <span>Please complete the following information: </span>
+        <br><br>
+        <label for="customer"><Strong>Customer: </Strong></label>
+        <br>
+        <select name="customer" id="customer">
+          <option value="select-customer">Customer...</option>
+          {{#each customers}}
+          <option value="{{this.id_customer}}">{{this.name}}</option>
+          {{/each}}
+        </select>
+
+        <br><br>
+
+        <label for="input-name"><strong>Name: </strong></label>
+        <br>
+        <input type="text" name="input-name" id="input-name">
+        <br><br>
+        <label for="input-age"><strong>Age:</strong></label>
+        <br>
+        <input type="text" name="input-age" id="input-age">
+        <br><br>
+        <label for="input-breed"><strong>Breed: </strong></label>
+        <br>
+        <input type="text" name="input-breed" id="input-breed">
+        <br><br>
+        <label for="input-temperament"><strong>Temperament: </strong></label>
+        <br>
+        <input type="text" name="input-temperament" id="input-temperament">
+        <br><br>
+        <label for="input-vaccinated"><strong>Vaccinated: </strong></label>
+        <br>
+        <select name="input-vaccinated" id="input-vaccinated">
+          <option value="select-vaccinated">Vaccinated...</option>
+          <option value="Y">Y</option>
+          <option value="N">N</option>
+        </select>
+
+        <br><br>
+
+        <button type="submit" id="button-add-dog">Click to Add</button>
+      </fieldset>
+    </form>
+  </div>
+
+  <!-- update -->
+  <div id="update-dog-block" style="display: none; justify-content: center;">
+    <form id="update-dog-form">
+      <fieldset>
+        <legend><strong>Update a Dog</strong></legend>
+        <br>
+
+        <label for="dog"><strong>Dog ID (read only): </strong></label>
+        <input id="dog" name="dog" readonly>
+        <br></br>
+        <span>Please edit the information below:</span>
+        <br><br>
+        <label for="customer-update"><strong>Customer: </strong></label>
+        <br>
+        <select id="customer-update" name="customer-update">
+        </select>
+        <br><br>
+        <label for="input-name-update"><strong>Name: </strong></label>
+        <br>
+        <input type="text" name="input-name-update" id="input-name-update">
+        <br><br>
+        <label for="input-age-update"><strong>Age: </strong></label>
+        <br>
+        <input type="text" name="input-age-update" id="input-age-update">
+        <br><br>
+        <label for="input-breed-update"><strong>Breed: </strong></label>
+        <br>
+        <input type="text" name="input-breed-update" id="input-breed-update">
+        <br><br>
+        <label for="input-temperament-update"><strong>Temperament: </strong></label>
+        <br>
+        <input type="text" name="input-temperament-update" id="input-temperament-update">
+        <br><br>
+        <label for="input-vaccinated-update"><strong>Vaccinated: </strong></label>
+        <br>
+        <select name="input-vaccinated-update" id="input-vaccinated-update">
+          <option value="select-vaccinated">Vaccinated...</option>
+          <option value="Y">Y</option>
+          <option value="N">N</option>
+        </select>
+
+        <br><br>
+        <input type="submit" value="Click to Update">
+      </fieldset>
+    </form><!-- update -->
+  </div>
+
+  <!-- delete -->
+  <div id="delete-dog-block" style="display: none; margin: 0 auto;">
+    <fieldset>
+      <legend><strong>Confirm Deletion</strong></legend>
+      <span>Are you sure you want to delete?</span>
+      <br><br>
+      <table id="delete-dog-table" border="1" cellpadding="5">
+
+        {{!-- Header section --}}
+        <thead>
+          <tr>
+            <th>customer</th>
+            <th>id_dog</th>
+            <th>
+              name
+            </th>
+            <th>
+              age
+            </th>
+            <th>
+              breed
+            </th>
+            <th>
+              temperament
+            </th>
+            <th>
+              vaccinated
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td id="td-customer-delete"></td>
+            <td id="td-id-dog-delete"></td>
+            <td id="td-name-delete"></td>
+            <td id="td-age-delete"></td>
+            <td id="td-breed-delete"></td>
+            <td id="td-temperament-delete"></td>
+            <td id="td-vaccinated-delete"></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <br>
+
+      <button id="button-delete-dog">Click to Delete</button></td>
+
+    </fieldset>
+
+  </div>
+  <!-- delete -->
+
+  <script src="./js/dogs/update_dog.js"></script>
+  <script src="./js/dogs/delete_dog.js"></script>
+  <script src="./js/dogs/add_dog.js"></script>
+</div>

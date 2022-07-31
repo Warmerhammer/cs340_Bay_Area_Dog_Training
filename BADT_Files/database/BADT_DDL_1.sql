@@ -113,7 +113,7 @@ DROP TABLE IF EXISTS `Packages`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Packages` (
-  `id_package` int(11) NOT NULL,
+  `id_package` int(11) NOT NULL AUTO_INCREMENT,
   `id_session_type` varchar(255) NOT NULL,
   `package_sessions` varchar(255) NOT NULL,
   `sale_price` varchar(255) DEFAULT NULL,
@@ -143,14 +143,14 @@ DROP TABLE IF EXISTS `Purchases`;
 CREATE TABLE `Purchases` (
   `id_purchase` int(11) NOT NULL AUTO_INCREMENT,
   `quantity` int(11) NOT NULL DEFAULT 1,
-  `id_customer` int(11) NOT NULL,
+  `id_customer` int(11),
   `id_package` int(11) NOT NULL,
   PRIMARY KEY (`id_purchase`,`id_package`),
   UNIQUE KEY `id_purchase` (`id_purchase`),
   KEY `fk_Purchases_Customers1` (`id_customer`),
   KEY `fk_Purchases_Packages1` (`id_package`),
-  CONSTRAINT `fk_Purchases_Customers1` FOREIGN KEY (`id_customer`) REFERENCES `Customers` (`id_customer`) ON DELETE SET NULL,
-  CONSTRAINT `fk_Purchases_Packages1` FOREIGN KEY (`id_package`) REFERENCES `Packages` (`id_package`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_Purchases_Customers1` FOREIGN KEY (`id_customer`) REFERENCES `Customers` (`id_customer`) ON DELETE SET NULL ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Purchases_Packages1` FOREIGN KEY (`id_package`) REFERENCES `Packages` (`id_package`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

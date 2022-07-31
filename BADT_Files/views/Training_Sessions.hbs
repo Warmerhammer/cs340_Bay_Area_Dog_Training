@@ -1,2 +1,129 @@
-{{>navbarPartial}}
-{{>Training_Sessions_Partial}}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<div style="text-align: center; display: flex; flex-direction: column; margin: 0 300px;">
+
+  {{>navbarPartial}}
+
+
+  <h1 style="margin-top: 50px;">Training Sessions</h1>
+  <table border="1" cellpadding="5">
+    {{!-- Header section --}}
+    <thead>
+      <tr>
+        <th><button onclick="showAddTrainingSession()">Add</button></th>
+        <th></th>
+        {{#each data.[0]}}
+        <th>{{@key}}</th>
+        {{/each}}
+        <th>
+          update
+        </th>
+        <th>
+          delete
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {{#each data}}
+      <tr>
+        <td></td>
+        <td></td>
+        <td>{{this.id_training_session}}</td>
+        <td>{{this.date_scheduled}}</td>
+        <td>{{this.id_session_type}}</td>
+        <td><button onclick="showUpdateTrainingSession({{this.id_training_session}})">Update</button></td>
+        <td><button onClick="showDeleteTrainingSession({{this.id_training_session}})">Delete</button></td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table> <!-- browse -->
+  <br><br>
+  <div id="add-training-session-block" style="justify-content: center;">
+    <form method="POST" id="add-training-session-form">
+      <fieldset class="fields">
+        <legend><strong>Add Training Session</strong></legend>
+        <span>Please complete following information:</li>
+          <br><br>
+        </span>
+        <label><strong> Date (yyyy-mm-dd hh:mm:ss): </strong></label>
+        <input type="text" name="input-date-scheduled-add" id="input-date-scheduled-add">
+        <label><strong> Session Type: </strong></label>
+        <select type="hidden" name="select-session-id-add" id="select-session-id-add">
+          <option value="select-session">Session type...</option>
+          {{#each session_types}}
+          <option value="{{this.id_session_type}}">{{this.id_session_type}}</option>
+          {{/each}}
+        </select>
+        <br><br>
+        <input class="btn" type="submit" value="Click To Add">
+        <br>
+      </fieldset>
+    </form>
+    <!--add new training session-->
+  </div><!-- insert -->
+
+  <!-- update -->
+  <div id="update-training-session-block" style="display: none; justify-content: center;">
+    <form id="update-training-session-form">
+      <fieldset>
+        <legend><strong>Update Training Session</strong></legend>
+        <br>
+        <span>Please edit the info. below:</span>
+        <br><br>
+        <label for="input-id-training-session"><strong>Training Session ID (Read Only): </strong></label>
+        <input type="number" name="input-id-training-session" id="input-id-training-session" readonly>
+
+        <label for="input-date-scheduled"><strong>Date (yyyy-mm-dd hh:mm:ss): </strong></label>
+        <input name="input-date-scheduled" id="input-date-scheduled" type="text">
+
+        <label for="input-id-session-type"><strong>Session Type: </strong></label>
+        <select name="input-id-session-type" id="input-id-session-type"></select>
+
+        <br><br>
+        <input type="submit" value="Update Training Session">
+      </fieldset>
+    </form>
+  </div>
+  <!-- update -->
+
+  <!-- delete -->
+  <div id="delete-training-session-block" style="display: none; justify-content: center;">
+    <fieldset>
+      <legend><strong>Confirm Deletion</strong></legend>
+      <br>
+      <table id="delete-training-session-table" border="1" cellpadding="5">
+
+        {{!-- Header section --}}
+        <thead>
+          <tr>
+            <th>id_training_session</th>
+            <th>date_scheduled</th>
+            <th>
+              id_session_type
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td id="td-id-training-session-delete"></td>
+            <td id="td-date-scheduled-delete"></td>
+            <td id="td-id-session-type-delete"></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <br>
+
+      <button id="button-delete-training-session">Click to Delete</button></td>
+
+    </fieldset>
+
+  </div>
+  <!-- delete -->
+</div>
+
+<script src="./js/training_sessions/add_training_session.js"></script>
+<script src="./js/training_sessions/update_training_session.js"></script>
+<script src="./js/training_sessions/delete_training_session.js"></script>
