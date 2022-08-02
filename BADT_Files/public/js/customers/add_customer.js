@@ -82,7 +82,6 @@ addRowToTable = (data) => {
     let emailCell = document.createElement("TD");
     let phoneNumberCell = document.createElement("TD");
     let dogsEnrolledCell = document.createElement("TD");
-
     let deleteCell = document.createElement("TD");
 
     // Fill the cells with correct data

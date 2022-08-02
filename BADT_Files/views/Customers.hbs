@@ -14,21 +14,13 @@
 
             {{!-- For just the first row, we print each key --}}
             <tr>
-                <th>
-                    <Button onClick="showAddForm()">Add</Button>
-                </th>
+                <th><Button onClick="showAddForm()">Add</Button></th>
                 <th></th>
                 {{#each data.[0]}}
-                <th>
-                    {{@key}}
-                </th>
+                <th>{{@key}}</th>
                 {{/each}}
-                <th>
-                    update
-                </th>
-                <th>
-                    delete
-                </th>
+                <th>update</th>
+                <th>delete</th>
             </tr>
 
         </thead>
@@ -47,7 +39,7 @@
                 <td>{{this.phone_number}}</td>
                 <td>{{this.number_of_dogs_enrolled}}</td>
                 <td><button onClick="showUpdateCustomer()">Update</button></td>
-                <td><button onclick="deleteCustomer({{this.id_customer}})">Delete</button></td>
+                <td><button onClick="deleteCustomer({{this.id_customer}})">Delete</button></td>
             </tr>
             {{/each}}
         </tbody>

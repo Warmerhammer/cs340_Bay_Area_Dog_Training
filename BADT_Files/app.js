@@ -8,7 +8,7 @@ var app = express();
 
 // Database
 var db = require('./database/db-connector')
-const PORT = 52522;
+const PORT = 3000;
 
 // Serve static assets
 app.use(express.static(path.join(__dirname, 'public')));
@@ -23,7 +23,7 @@ app.set('view engine', 'hbs');
 
 // GET ROUTES
 
-app.get('/', function (req, res) {
+app.get('/Index', function (req, res) {
     res.render('Index');
 });
 
@@ -67,7 +67,6 @@ app.get('/Dogs', function (req, res) {
         })
     })
 });
-
 
 app.get('/Dog_has_Training_Sessions', function (req, res) {
     let query1 = "SELECT * FROM Dog_Has_Training_Sessions;"
@@ -115,7 +114,6 @@ app.get('/Dog_has_Training_Sessions', function (req, res) {
 
     })
 });
-
 
 app.get('/dhts-by-id', function (req, res) {
     let dogID = parseInt(req.query.id_dog);
@@ -203,7 +201,10 @@ app.get('/Session_Types', function (req, res) {
 });
 
 app.get('/Trainers', function (req, res) {
-    res.render('Trainers');
+    let query1 = "SELECT * FROM Trainers;";
+    db.pool.query(query1, function (error, rows, fields) {
+        res.render('Trainers', { data: rows });
+    });
 });
 
 app.get('/Trainer_has_Training_Session', function (req, res) {
@@ -221,6 +222,16 @@ app.get('/Training_Sessions', function (req, res) {
         })
 
     });
+});
+
+app.get('/trainer-by-id', function (req, res) {
+    let trainerID = parseInt(req.query.id_trainer);
+    let query1 = "SELECT * FROM Trainers WHERE id_trainer = ?";
+    db.pool.query(query1, [trainerID], function (error, rows, fields) {
+        let trainer = rows;
+        res.send({ data: trainer });
+    })
+
 });
 
 app.get('/dog-by-id', function (req, res) {
@@ -251,6 +262,8 @@ app.get('/dog-by-id', function (req, res) {
     })
 })
 
+
+
 app.get('/package-by-id', function (req, res) {
     let packageID = parseInt(req.query.id_package);
     let query1 = "SELECT * FROM Packages WHERE id_package = ?";
@@ -272,6 +285,7 @@ app.get('/session-type-by-id', function (req, res) {
         res.send({ data: session_type });
     })
 })
+
 
 app.get('/training-session-by-id', function (req, res) {
     let trainingSessionID = parseInt(req.query.id_training_session);
@@ -297,10 +311,13 @@ app.post('/add-customer-form', function (req, res) {
         number_of_dogs_enrolled = 'NULL'
     }
 
-    query1 = `INSERT INTO Customers(name, email, phone_number, 
-    number_of_dogs_enrolled) VALUES ('${data['input-name']}', 
-    '${data['input-email']}', '${data['input-phone-number']}', 
-    '${number_of_dogs_enrolled}');`
+    let query1 = `INSERT INTO Customers(name, email, phone_number, number_of_dogs_enrolled) 
+    VALUES (
+            '${data['input-name']}', 
+            '${data['input-email']}', 
+            '${data['input-phone-number']}', 
+            '${number_of_dogs_enrolled}'
+            );`
 
     db.pool.query(query1, function (error, rows, fields) {
         if (error) {
@@ -314,6 +331,34 @@ app.post('/add-customer-form', function (req, res) {
     })
 });
 
+app.post('/add-trainer-form', function (req, res) {
+    let data = req.body;
+
+    let wage = parseInt(data['input-wage']);
+    if (isNaN(wage)) {
+        wage = 'NULL'
+    }
+
+    let insertQuery = `INSERT INTO Trainers(name, phone_number, email, wages, start_date, preferred_schedule)
+    VALUES(
+        '${data['input-name']}',
+        '${data['input-phone-number']}',
+        '${data['input-email']}',
+        '${wage}',
+        '${data['input-start-date']}',
+        '${data['input-preferred-schedule']}'
+        );`
+    db.pool.query(insertQuery, function (error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        }
+
+        else {
+            res.redirect('/Trainers')
+        }
+    })
+});
 
 app.post('/add-dog-form', function (req, res) {
     let data = req.body;
@@ -478,6 +523,24 @@ app.delete('/delete-customer', function (req, res, next) {
     })
 });
 
+app.delete('/delete-trainer', function (req, res, next) {
+    let data = req.body;
+    let trainerID = parseInt(data.id_trainer);
+    let deleteTrainer = `DELETE FROM Trainers WHERE id_trainer = ?`;
+    
+    db.pool.query(deleteTrainer, [trainerID], function (error, rows, fields) {
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error);
+            res.sendStatus(400);
+        }
+
+        else {
+            res.sendStatus(204);
+        }
+    })
+});
 app.delete('/delete-dog', function (req, res, next) {
     let data = req.body;
     let dogID = parseInt(data.id_dog);
@@ -496,7 +559,6 @@ app.delete('/delete-dog', function (req, res, next) {
         }
     })
 });
-
 
 app.delete('/delete-training-session', function (req, res, next) {
     let data = req.body;
@@ -617,23 +679,47 @@ app.put('/put-customer-ajax', function (req, res, next) {
     })
 });
 
+app.put('/update-trainer', function (req, res) {
+    let data = req.body;
+    let trainerID = parseInt(data.id_trainer)
 
+    let queryTrainer = `UPDATE Trainers SET
+                            name = '${data['name']}',
+                            phone_number = '${data['phone_number']}',
+                            email = '${data['email']}',
+                            wages = '${data['wages']}',
+                            number_of_sessions_taught = '${data['sessions_taught']}',
+                            start_date = '${data['start_date']}',
+                            preferred_schedule = '${data['preferred_schedule']}'
+                        WHERE id_trainer = '${trainerID}'
+                        ;`
+    
+        db.pool.query(queryTrainer, function (error, rows, fileds) {
+            if (error) {
+                // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                console.log(error);
+                res.sendStatus(400);
+            }
+            else {
+                res.send(rows);
+            }
+    })
+});
 app.put('/update-dog', function (req, res) {
     let data = req.body;
     let dogID = parseInt(data.id_dog)
     let customerID = parseInt(data.id_customer)
     const vaccinated = data['vaccinated'] == 'Y' ? 1 : 0;
 
-    let queryDog =
-        `UPDATE Dogs SET 
-    id_customer = '${customerID}', 
-    fully_vaccinated =  '${vaccinated}',
-    temperament = '${data['temperament']}',
-    name = '${data['name']}',
-    age = '${data['age']}',
-    breed = '${data['breed']}'
-    WHERE id_dog = '${dogID}'
-    ;`
+    let queryDog = `UPDATE Dogs SET 
+                        id_customer = '${customerID}', 
+                        fully_vaccinated =  '${vaccinated}',
+                        temperament = '${data['temperament']}',
+                        name = '${data['name']}',
+                        age = '${data['age']}',
+                        breed = '${data['breed']}'
+                    WHERE id_dog = '${dogID}'
+                    ;`
     db.pool.query(queryDog, function (error, rows, fileds) {
         if (error) {
             // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
@@ -711,7 +797,6 @@ app.put('/update-dhts', function (req, res) {
     })
 });
 
-
 app.put('/update-package', function (req, res) {
     let data = req.body;
     let packageID = parseInt(data.id_package)
@@ -742,5 +827,5 @@ app.put('/update-package', function (req, res) {
 // LISTENER
 
 app.listen(PORT, function () {
-    console.log(`Express started on http://${process.env.HOSTNAME}:${PORT}/Index; press Ctrl-C to terminate.`)
+    console.log(`Express started on http://localhost:${PORT}/Index; press Ctrl-C to terminate.`)
 });    
