@@ -49,8 +49,8 @@
       {{/each}}
     </tbody>
   </table>
-  <!-- browse -->
-
+  
+  <!-- add a new dog training session -->
   <p>&nbsp;</p>
 
   <div id="add-dhts-block" style="justify-content: center;">
@@ -75,7 +75,7 @@
         <select name="select-add-dhts-training-session" id="select-add-dhts-training-session">
           <option value="select-ts">Training Session...</option>
           {{#each training_sessions}}
-          <option value="{{this.id_training_session}}">{{this.id_session_type}} : {{this.date_scheduled}}</option>
+          <option value="{{this.id_training_session}}"> {{this.id_session_type}} : {{this.date_scheduled}}</option>
           {{/each}}
         </select>
 
@@ -91,8 +91,9 @@
 
       </fieldset>
     </form>
-  </div><!-- insert -->
-
+  </div>
+  
+  <!-- update a new dog training session -->
   <div id="update-dhts-block" style="display: none;">
     <form method="POST" id="update-dhts-form">
       <fieldset>
@@ -114,7 +115,9 @@
 
     </form>
     </fieldset>
-  </div><!-- update -->
+  </div>
+  
+  <!-- delete -->
 
   <div id="delete-dhts-block" style="display: none; margin: 0 auto;">
     <fieldset>
@@ -155,7 +158,7 @@
       <br><br>
       <button type="submit" id="button-dhts-delete">Click to Delete</button>
     </fieldset>
-  </div><!-- delete -->
+  </div>
 </div>
 
 </body>

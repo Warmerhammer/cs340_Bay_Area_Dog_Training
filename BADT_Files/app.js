@@ -10,7 +10,7 @@ var app = express();
 var db = require('./database/db-connector')
 const PORT = 3000;
 
-// Serve static assets
+// Serve static assets`
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Configuring Express to Handle JSON and Form Data
@@ -168,6 +168,19 @@ app.get('/dhts-by-id', function (req, res) {
 
 });
 
+app.get('/thts-by-id', function (req, res) {
+    let trainerID = parseInt(req.query.id_trainer);
+    let trainingSession = parseInt(req.query.id_training_session);
+    let query1 = `SELECT * FROM Trainer_Has_Training_Sessions WHERE id_trainer = ${trainerID} AND id_training_session = ${trainingSession}`;
+    db.pool.query(query1, function (error, rows, fields) {
+        if (error) {
+            console.log(error)
+        }
+        let data = rows;
+            res.send({ data: data});
+    })
+});
+
 app.get('/Packages', function (req, res) {
     let query1 = "SELECT * FROM Packages;"
     let query2 = "SELECT * FROM Session_Types;"
@@ -208,7 +221,50 @@ app.get('/Trainers', function (req, res) {
 });
 
 app.get('/Trainer_has_Training_Session', function (req, res) {
-    res.render('Trainer_has_Training_Session');
+    let query1 = "SELECT * FROM Trainer_Has_Training_Sessions;";
+    let query2 = "SELECT * FROM Training_Sessions;";
+    let query3 = "SELECT * FROM Trainers;"
+    // Run the 1st query
+    db.pool.query(query1, function (error, rows, fileds) {
+        let thts = rows;
+        db.pool.query(query2, (err, row, field) => {
+            let training_sessions = row;
+            db.pool.query(query3, function (e, r, f) {
+                let trainers = r;
+                let trainersNameMap = {};
+                trainers.map(trainer => {
+                    let id = parseInt(trainer.id_trainer, 10)
+                    trainersNameMap[id] = trainer["name"]
+                })
+
+                let tsDateMap = {};
+                training_sessions.map(ts => {
+                    let tsID = parseInt(ts.id_training_session);
+                    tsDateMap[tsID] = ts.date_scheduled
+                })
+
+                let tsTypeMap = {};
+                training_sessions.map(ts => {
+                    let id = parseInt(ts.id_training_session)
+                    tsTypeMap[id] = ts.id_session_type
+                })
+
+                thts = thts.map(single_session => {
+                    return Object.assign(single_session,
+                        // { trainer_name: trainersNameMap[single_session.id_trainer] },
+                        // { ts_date: tsDateMap[single_session.id_training_session] },
+                        // { ts_type: tsTypeMap[single_session.id_training_session] }
+                    )
+                })
+
+                res.render('Trainer_has_Training_Session', { data: thts, trainers, training_sessions });
+
+            })
+
+        })
+
+
+    })
 });
 
 app.get('/Training_Sessions', function (req, res) {
@@ -260,9 +316,7 @@ app.get('/dog-by-id', function (req, res) {
             res.send({ data: dogs, customers: customers });
         })
     })
-})
-
-
+});
 
 app.get('/package-by-id', function (req, res) {
     let packageID = parseInt(req.query.id_package);
@@ -275,7 +329,7 @@ app.get('/package-by-id', function (req, res) {
             res.send({ data: packages, session_types });
         })
     })
-})
+});
 
 app.get('/session-type-by-id', function (req, res) {
     let sessionTypeID = req.query.id_session_type;
@@ -284,8 +338,7 @@ app.get('/session-type-by-id', function (req, res) {
         let session_type = rows;
         res.send({ data: session_type });
     })
-})
-
+});
 
 app.get('/training-session-by-id', function (req, res) {
     let trainingSessionID = parseInt(req.query.id_training_session);
@@ -298,7 +351,7 @@ app.get('/training-session-by-id', function (req, res) {
             res.send({ data, session_types });
         })
     });
-})
+});
 
 // POST ROUTES
 
@@ -425,6 +478,29 @@ app.post('/add-training-session', function (req, res) {
     })
 });
 
+app.post('/add-thts', function (req, res) {
+    let data = req.body;
+
+    let trainerID = parseInt(data.id_trainer)
+    let tsID = parseInt(data.id_training_session)
+
+    let insertQuery = `INSERT INTO Trainer_Has_Training_Sessions(id_trainer, id_training_session)
+    VALUES (
+            '${trainerID}', 
+            '${tsID}'
+            );`
+
+    db.pool.query(insertQuery, function (error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        }
+
+        else {
+            res.sendStatus(200);
+        }
+    })
+});
 
 app.post('/add-dhts', function (req, res) {
     let data = req.body;
@@ -573,6 +649,34 @@ app.delete('/delete-training-session', function (req, res, next) {
             res.sendStatus(400);
         }
 
+        else {
+            res.sendStatus(200);
+        }
+    })
+});
+
+app.delete('/delete-thts', function (req, res) {
+    let data = req.body;
+    let trainingSessionID = parseInt(data.id_training_session)
+    if (isNaN(trainingSessionID)) {
+        return res.send(400);
+    }
+
+    let trainerID = parseInt(data.id_trainer)
+    if (isNaN(trainerID)) {
+        return res.send(400);
+    }
+
+    let updateQuery = `DELETE FROM Trainer_Has_Training_Sessions WHERE id_training_session = ? AND id_trainer = ?;`
+
+    let filter = [trainingSessionID, trainerID]
+
+    db.pool.query(updateQuery, filter, function (error, rows, fileds) {
+        if (error) {
+            // (400: Bad Request)
+            console.log(error);
+            res.sendStatus(400);
+        }
         else {
             res.sendStatus(200);
         }
