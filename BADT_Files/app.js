@@ -447,7 +447,6 @@ app.post('/add-dog-form', function (req, res) {
     })
 });
 
-
 app.post('/add-training-session', function (req, res) {
     let data = req.body;
 
@@ -549,7 +548,6 @@ app.post('/add-package-form', function (req, res) {
         }
     })
 });
-
 
 app.post('/add-session-type', function (req, res) {
     let data = req.body;
@@ -667,11 +665,11 @@ app.delete('/delete-thts', function (req, res) {
         return res.send(400);
     }
 
-    let updateQuery = `DELETE FROM Trainer_Has_Training_Sessions WHERE id_training_session = ? AND id_trainer = ?;`
+    let updateQuery = `DELETE FROM Trainer_Has_Training_Sessions WHERE id_training_session = ${trainingSessionID} AND id_trainer = ${trainerID};`
 
-    let filter = [trainingSessionID, trainerID]
+    // let filter = [trainingSessionID, trainerID]
 
-    db.pool.query(updateQuery, filter, function (error, rows, fileds) {
+    db.pool.query(updateQuery, function (error, rows, fileds) {
         if (error) {
             // (400: Bad Request)
             console.log(error);
