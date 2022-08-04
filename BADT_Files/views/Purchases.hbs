@@ -1,2 +1,110 @@
-{{>navbarPartial}}
-{{>PurchasesPartial}}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+<div style="text-align: center; display: flex; flex-direction: column; margin: 0 300px;">
+
+{{> navbarPartial}}
+
+<h1 style="margin-top: 50px;">Purchases</h1>
+<table id="thts-table" border="1" cellpadding="5">
+{{!-- Header section --}}
+<thead>
+    <tr>
+        <th><button onClick="showAddPurchase()">Add</button></th>
+            {{#each data.[0]}}
+            <th>{{@key}}</th>
+            {{/each}}
+            <th>Update Information</th>
+            <th>Delete</th>
+    </tr>
+</thead>
+
+{{!-- Body section --}}
+<tbody>
+{{#each data}}
+<tr>
+    <td></td>
+    <td>{{this.id_purchase}}</td>
+    <td>{{this.quantity}}</td>
+    <td>{{this.id_customer}}</td>
+    <td>{{this.id_package}}</td>
+    <td><button onClick="update()">Update Information</button></td>
+    <td><button onClick="showDeletePurchases({{this.id_purchase}}, {{this.quantity}}, {{this.id_customer}}, {{this.id_package}})">Delete</button></td>
+</tr>
+{{/each}}
+</tbody>
+</table>
+
+<!-- Add a new Purchase -->
+<div id="add-purchases-block" style="display: none; justify-content: center;">
+<form method="POST" id="add-purchases-form">
+<fieldset>
+    <legend><strong>Add a New Purchase</strong></legend>
+    <br>
+    <span>Please select a customer, a training package, and the quantity that they purchased:</span>
+    <br><br>
+    <label for="add-customer"><strong>Customer: </strong></label>
+    <br>
+    <select name="select-add-customer-name" id="select-add-customer-name">
+    <option value="select-customer">Select Customer...</option>
+    {{#each customers}}
+    <option value="{{this.id_customer}}">{{this.name}}</option>
+    {{/each}}
+    </select>
+    <br><br>
+    <label for="add-package"><strong>Package Type:</strong></label>
+    <br>
+    <select name="select-add-package-type" id="select-add-package-type">
+    <option value="select-package">Select Package...</option>
+    {{#each packages}}
+    <option value="{{this.id_package}}">{{this.id_session_type}} : Qty {{this.package_sessions}} </option>
+    {{/each}}
+    </select>
+    <br><br>
+    <label for="add-quantity"><strong>Specify Quantity:</strong></label>
+    <br>
+    <input type="number" name="select-add-quantity" id="select-add-quantity">
+    <br>
+    <br>
+    <button type="submit">Add Purchase</button>
+</fieldset>
+</form>
+</div>
+
+<!-- Delete a Purchase-->
+
+<div id="delete-purchases-block" style="display: none; justify-content: center;">
+<fieldset>
+    <legend><strong>Confirm Deletion</legend>
+    <br>
+    <span>Are you sure you want to delete?</span>
+    <br><br>
+    <table id="delete-purchases-table" border="1" cellpadding="5" style="margin: 0 auto">
+    
+    <thead>
+        <tr>
+        <th>id_purchase</th>
+        <th>quantity</th>
+        <th>id_customer</th>
+        <th>id_package</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+        <td id="td-delete-purchases-id-purchases"></td>
+        <td id="td-delete-purchases-quantity"></td>
+        <td id="td-delete-purchases-id-customer"></td>
+        <td id="td-delete-purchases-id-package"></td>
+        </tr>
+    </tbody>
+    
+    </table>
+    
+    <br><br>
+    
+    <button type="submit" id="button-purchases-delete">Click to Delete</button>
+</fieldset>
+</div>
+
+<script src="./js/purchases/add_purchases.js"></script>
+<script src="./js/purchases/delete_purchases.js"></script>
