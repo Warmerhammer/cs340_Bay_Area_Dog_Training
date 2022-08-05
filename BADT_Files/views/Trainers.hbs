@@ -1,2 +1,180 @@
-{{>navbarPartial}}
-{{>TrainersPartial}}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+<div style="text-align: center; display: flex; flex-direction: column; margin: 0 300px;">
+{{> navbarPartial}}
+
+<h1 style="margin-top: 50px;">Trainers</h1>
+<table id="trainer-table" border="1" cellpadding="5">
+
+{{!-- Header section --}}
+<thead>
+    <tr>
+        <th><button onClick="showAddTrainer()">Add</button></th>
+        <th>id_trainer</th>
+        <th>wages</th>
+        <th>name</th>
+        <th>email</th>
+        <th>phone_number</th>
+        <th>number_of_sessions_taught</th>
+        <th>start_date</th>
+        <th>preferred_schedule</th>
+        <th>update</th>
+        <th>delete</th>
+    </tr>
+</thead>
+
+    {{!-- Body section --}}
+<tbody>
+    {{#each data}}
+    <tr>
+        <td></td>
+        <td>{{this.id_trainer}}</td>
+        <td>{{this.wages}}</td>
+        <td>{{this.name}}</td>
+        <td>{{this.email}}</td>
+        <td>{{this.phone_number}}</td>
+        <td>{{this.number_of_sessions_taught}}</td>
+        <td>{{this.start_date}}</td>
+        <td>{{this.preferred_schedule}}</td>
+        <td><button onClick="showUpdateTrainer({{this.id_trainer}})">Update</button></td>
+        <td><button onClick="showDeleteForm({{this.id_trainer}})">Delete</button></td>
+    </tr>
+    {{/each}}
+    </tbody>
+</table>
+<br>
+
+{{!-- Form to add a trainer to the table --}}
+<div id="add-trainer-block" style="display: none; justify-content: center;">
+<form method="POST" id="add-trainer-form" action="/add-trainer-form">
+    <fieldset>
+        <legend><strong>Add a Trainer</strong></legend>
+        <span>Please complete the following information: </span>
+        <br><br>
+
+        <label for="input-name"><strong>Name: </strong></label>
+        <br>
+        <input type="text" name="input-name" id="input-name">
+        <br><br>
+        <label for="input-phone-number"><strong>Phone Number: </strong></label>
+        <br>
+        <input type="text" name="input-phone-number" id="input-phone-number">
+        <br><br>
+        <label for="input-email"><strong>Email:</strong></label>
+        <br>
+        <input type="text" name="input-email" id="input-email">
+        <br><br>
+        <label for="input-wage"><strong>Wage: </strong></label>
+        <br>
+        <input type="number" name="input-wage" id="input-wage">
+        <br><br>
+        <label for="input-start-date"><strong>Start Date (YYYY-MM-DD): </strong></label>
+        <br>
+        <input type="text" name="input-start-date" id="input-start-date">
+        <br><br>
+        <label for="input-preferred-schedule"><strong>Preferred Schedule: </strong></label>
+        <br>
+        <input type="text" name="input-preferred-schedule" id="input-preferred-schedule">
+        </select>
+
+        <br><br>
+
+        <button type="submit" id="button-add-trainer">Click to Add</button>
+    </fieldset>
+</form>
+</div>
+
+<!-- Form to update trainer-->
+<div id="update-trainer-block" style="display: none; justify-content: center;">
+<form id="update-trainer-form">
+    <fieldset>
+        <legend><strong>Update a Trainer</strong></legend>
+        <br>
+
+        <label for="trainer-ID"><strong>Trainer ID (read only): </strong></label>
+        <input name="update_id_trainer" id="update_id_trainer">
+        <br></br>
+        <span>Please edit the information below:</span>
+        <br><br>
+        <label for="input-name-update"><strong>Name: </strong></label>
+        <br>
+        <input id="input-name-update" name="input-name-update">
+        <br><br>
+        <label for="input-phone-number-update"><strong>Phone Number: </strong></label>
+        <br>
+        <input type="text" name="input-phone-number-update" id="input-phone-number-update">
+        <br><br>
+        <label for="input-email-update"><strong>Email: </strong></label>
+        <br>
+        <input type="text" name="input-email-update" id="input-email-update">
+        <br><br>
+        <label for="input-wage-update"><strong>Wage: </strong></label>
+        <br>
+        <input type="text" name="input-wage-update" id="input-wage-update">
+        <br><br>
+        <label for="input-sessions-taught-update"><strong>Number of Sessions Taught: </strong></label>
+        <br>
+        <input type="text" name="input-sessions-taught-update" id="input-sessions-taught-update">
+        <br><br>
+        <label for="input-start-date-update"><strong>Start Date: </strong></label>
+        <br>
+        <input type="text" name="input-start-date-update" id="input-start-date-update">
+        <br><br>
+        <label for="input-preferred-schedule-update"><strong>Preferred Schedule: </strong></label>
+        <br>
+        <input type="text" name="input-preferred-schedule-update" id="input-preferred-schedule-update">
+        <br><br>
+        <input type="submit" value="Click to Update">
+    </fieldset>
+    </form><!-- update -->
+</div>
+
+<!-- Form to delete a Trainer-->
+<div id="delete-trainer-block" style="display: none; margin: 0 auto;">
+    <fieldset>
+    <legend><strong>Confirm Deletion</strong></legend>
+    <span>Are you sure you want to delete?</span>
+    <br><br>
+    <table id="delete-trainer-table" border="1" cellpadding="5">
+
+        <thead>
+        <tr>
+            <th>id_trainer</th>
+            <th>wages</th>
+            <th>name</th>
+            <th>email</th>
+            <th>phone_number</th>
+            <th>number_of_sessions_taught</th>
+            <th>start_date</th>
+            <th>preferred_schedule</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        <tr>
+            <td id="td-id-trainer-delete"></td>
+            <td id="td-wages-delete"></td>
+            <td id="td-name-delete"></td>
+            <td id="td-email-delete"></td>
+            <td id="td-phone-number-delete"></td>
+            <td id="td-sessions-taught-delete"></td>
+            <td id="td-start-date-delete"></td>
+            <td id="td-preferred-schedule-delete"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <br>
+
+    <button id="button-delete-trainer">Click to Delete</button></td>
+
+    </fieldset>
+
+</div>
+<!-- delete -->
+
+<script src="./js/trainers/update_trainer.js"></script>
+<script src="./js/trainers/delete_trainer.js"></script>
+<script src="./js/trainers/add_trainer.js"></script>
+</div>

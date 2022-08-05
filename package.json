@@ -1,0 +1,19 @@
+{
+  "name": "cs340_bay_area_dog_training",
+  "version": "1.0.0",
+  "description": "Repository for BADT database files",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Warmerhammer/cs340_Bay_Area_Dog_Training.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Warmerhammer/cs340_Bay_Area_Dog_Training/issues"
+  },
+  "homepage": "https://github.com/Warmerhammer/cs340_Bay_Area_Dog_Training#readme"
+}
