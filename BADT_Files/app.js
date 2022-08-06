@@ -1,3 +1,7 @@
+//-- Code referenced heavily from Canvas Module Week 7 Project Development -Exploration – Developing in Node.js 
+//    and osu-cs340-ecampus / nodejs-starter-app : https://github.com/osu-cs340-ecampus/nodejs-starter-app 
+// Additional citations have been noted below with with relevent code.
+
 // SETUP
 
 //Initialize modules
@@ -477,7 +481,6 @@ app.post('/add-dog-form', function (req, res) {
 
 app.post('/add-training-session', function (req, res) {
     let data = req.body;
-
     // date format reference:https://stackoverflow.com/questions/52869695/check-if-a-date-string-is-in-iso-and-utc-format
     // validation for date format
     let date = data['date_scheduled'];
@@ -884,7 +887,7 @@ app.put('/update-dog', function (req, res) {
     let dogID = parseInt(data.id_dog)
     let customerID = parseInt(data.id_customer)
     const vaccinated = data['vaccinated'] == 'Y' ? 1 : 0;
-
+k
     let queryDog = `UPDATE Dogs SET 
                         id_customer = '${customerID}', 
                         fully_vaccinated =  '${vaccinated}',

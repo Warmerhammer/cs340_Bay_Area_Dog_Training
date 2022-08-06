@@ -1,153 +1,130 @@
+{{!-- Code referenced heavily from Canvas Module Week 7 Project Development -Exploration – Developing in Node.js 
+and osu-cs340-ecampus / nodejs-starter-app : https://github.com/osu-cs340-ecampus/nodejs-starter-app --}}
+
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <div style="text-align: center; display: flex; flex-direction: column; margin: 0 300px;">
-  {{>navbarPartial}}
+{{>navbarPartial}}
+<h1 style="margin-top: 50px;">Packages</h1>
 
+{{!-- READ - Call SELECT query to display packages information to the table (includes link to function to DELETE Package entry) --}}
+<table id="packages-table" border="1" cellpadding="5">
+  <thead>
+    <tr>
+      <th><button onClick="showAddPackage()">Add</button></th>
+      <th></th>
+      <th>id_package</th>
+      <th>id_session_type</th>
+      <th>package_sessions</th>
+      <th>sale price</th>
+      <th>update</th>
+      <th>delete</th>
+    </tr>
+  </thead>
 
-  <h1 style="margin-top: 50px;">Packages</h1>
+  <tbody>
+    {{#each data}}
+    <tr>
+      <td></td>
+      <td></td>
+      <td>{{this.id_package}}</td>
+      <td>{{this.id_session_type}}</td>
+      <td>{{this.package_sessions}}</td>
+      <td>{{this.sale_price}}</td>
+      <td><button onclick="showUpdateForm({{this.id_package}})">Update</button></td>
+      <td><button onclick="showDeleteForm({{this.id_package}})">Delete</button></td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
 
-  <table id="packages-table" border="1" cellpadding="5">
-    {{!-- Header section --}}
-    <thead>
-      <tr>
-        <th><button onClick="showAddPackage()">Add</button></th>
-        <th></th>
-        <th>id_package</th>
-        <th>id_session_type</th>
-        <th>package_sessions</th>
-        <th>sale price</th>
-        <th>update</th>
-        <th>delete</th>
-      </tr>
-
-    </thead>
-
-    {{!-- Body section --}}
-    <tbody>
-      {{#each data}}
-      <tr>
-        <td></td>
-        <td></td>
-        <td>{{this.id_package}}</td>
-        <td>{{this.id_session_type}}</td>
-        <td>{{this.package_sessions}}</td>
-        <td>{{this.sale_price}}</td>
-        <td><button onclick="showUpdateForm({{this.id_package}})">Update</button></td>
-        <td><button onclick="showDeleteForm({{this.id_package}})">Delete</button></td>
-      </tr>
-      {{/each}}
-    </tbody>
-  </table>
-
-  <p>&nbsp;</p>
-
-  <!-- Add new Package table -->
-  <div id="add-package-block">
-    <form id="add-package-form">
-      <fieldset>
-        <legend><strong>Add a Package</strong></legend>
-        <span>Please complete the following information: </span>
-        <br><br>
-
-        <label for="add_session_type"><strong>Session Type: </strong></label>
-        <br>
-        <select name="add_session_type" id="add_session_type">
-          <option value="select-session">Session type...</option>
-          {{#each session_types}}
-          <option value="{{this.id_session_type}}">{{this.id_session_type}}</option>
-          {{/each}}
-        </select>
-
-        <br><br>
-
-        <label for="add_package_sessions"><strong>Package Sessions: </strong></label>
-        <br>
-        <input type="number" name="add_package_sessions" id="add_package_sessions">
-        <br><br>
-        <label for="add_sale_price"><strong>Sale Price: </strong></label>
-        <br>
-        <input type="text" id="add_sale_price" name="add_sale_price">
-        <br><br>
-
-        <button type="submit" id="button-add-package">Click to Add</button>
-
-      </fieldset>
-    </form>
-  </div>
-
-  <div id="delete-package-block" style="display: none; margin:0 auto;">
+{{!-- CREATE - Form to add a Package entry to the table --}}
+<div id="add-package-block">
+  <form id="add-package-form">
     <fieldset>
-      <legend><strong>Confirm Deletion</strong></legend>
-      <p>Are you sure you wish to delete the following?</p>
-      <table id="delete-package-table" border="1" cellpadding="5">
-
-        <thead>
-          <tr>
-            <th>
-              id_package
-            </th>
-            <th>
-              id_session_type
-            </th>
-            <th>
-              package_sessions
-            </th>
-            <th>
-              sale price
-            </th>
-          </tr>
-
-        </thead>
-
-        {{!-- Body section --}}
-        <tbody>
-
-          {{!-- For each row, print the id, name, email, phone number and number of dogs enrolled, in order --}}
-          <tr>
-            <td id="td_delete_id_package"></td>
-            <td id="td_delete_id_session_type"></td>
-            <td id="td_delete_package_sessions"></td>
-            <td id="td_delete_sale_price"></td>
-          </tr>
-        </tbody>
-      </table>
+      <legend><strong>Add a Package</strong></legend>
+      <span>Please complete the following information: </span>
       <br><br>
-      <button type="submit" id="button-delete-package">Clck to Delete</button>
+      <label for="add_session_type"><strong>Session Type: </strong></label>
+      <br>
+      <select name="add_session_type" id="add_session_type">
+        <option value="select-session">Session type...</option>
+        {{#each session_types}}
+        <option value="{{this.id_session_type}}">{{this.id_session_type}}</option>
+        {{/each}}
+      </select>
+      <br><br>
+      <label for="add_package_sessions"><strong>Package Sessions: </strong></label>
+      <br>
+      <input type="number" name="add_package_sessions" id="add_package_sessions">
+      <br><br>
+      <label for="add_sale_price"><strong>Sale Price: </strong></label>
+      <br>
+      <input type="text" id="add_sale_price" name="add_sale_price">
+      <br><br>
+      <button type="submit" id="button-add-package">Click to Add</button>
     </fieldset>
-  </div>
-  
-  <!-- update -->
-
-  <div id="update-package-block" style="display: none;">
-    <form id="update-package-form">
-      <fieldset>
-        <legend><strong>Update a Package</strong></legend>
-        <span>Please edit the following for package: </span>
-        <br><br>
-
-        <label for="update_id_package"><strong>Package ID (read only): </strong></label>
-        <input type="number" name="update_id_package" id="update_id_package" readonly>
-        <br><br>
-        <label for="update_session_type"><strong>Session Type: </strong></label>
-        <br>
-        <select name="update_session_type" id="update_session_type">
-        </select>
-        <br><br>
-        <label for="update_package_sessions"><strong>Package Sessions: </strong></label>
-        <br>
-        <input type="number" name="update_package_sessions" id="update_package_sessions">
-        <br><br>
-        <label for="update_sale_price"><strong>Sale Price: </strong></label>
-        <br>
-        <input type="text" id="update_sale_price" name="update_sale_price">
-        <br><br>
-        <button type="submit" id="button-update-package">Click to Update</button>
-      </fieldset>
-    </form>
-  </div><!-- insert -->
-
+  </form>
 </div>
 
+{{!-- UPDATE - Form to update a Package entry in the table --}}
+<div id="update-package-block" style="display: none;">
+  <form id="update-package-form">
+    <fieldset>
+      <legend><strong>Update a Package</strong></legend>
+      <span>Please edit the following for package: </span>
+      <br><br>
+      <label for="update_id_package"><strong>Package ID (read only): </strong></label>
+      <input type="number" name="update_id_package" id="update_id_package" readonly>
+      <br><br>
+      <label for="update_session_type"><strong>Session Type: </strong></label>
+      <br>
+      <select name="update_session_type" id="update_session_type">
+      </select>
+      <br><br>
+      <label for="update_package_sessions"><strong>Package Sessions: </strong></label>
+      <br>
+      <input type="number" name="update_package_sessions" id="update_package_sessions">
+      <br><br>
+      <label for="update_sale_price"><strong>Sale Price: </strong></label>
+      <br>
+      <input type="text" id="update_sale_price" name="update_sale_price">
+      <br><br>
+      <button type="submit" id="button-update-package">Click to Update</button>
+    </fieldset>
+  </form>
+</div>
+
+{{!-- DELETE - Form to delete a Package entry in the table --}}
+<div id="delete-package-block" style="display: none; margin:0 auto;">
+  <fieldset>
+    <legend><strong>Confirm Deletion</strong></legend>
+    <p>Are you sure you wish to delete the following?</p>
+    <table id="delete-package-table" border="1" cellpadding="5">
+      <thead>
+        <tr>
+          <th>id_package</th>
+          <th>id_session_type</th>
+          <th>package_sessions</th>
+          <th>sale price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td id="td_delete_id_package"></td>
+          <td id="td_delete_id_session_type"></td>
+          <td id="td_delete_package_sessions"></td>
+          <td id="td_delete_sale_price"></td>
+        </tr>
+      </tbody>
+    </table>
+    <br><br>
+    <button type="submit" id="button-delete-package">Clck to Delete</button>
+  </fieldset>
+</div>
+</div>
+
+<!-- Scripts -->
 <script src="./js/packages/add_package.js"></script>
 <script src="./js/packages/update_package.js"></script>
 <script src="./js/packages/delete_package.js"></script>

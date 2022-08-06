@@ -1,13 +1,16 @@
+{{!-- Code referenced heavily from Canvas Module Week 7 Project Development -Exploration – Developing in Node.js 
+and osu-cs340-ecampus / nodejs-starter-app : https://github.com/osu-cs340-ecampus/nodejs-starter-app --}}
+
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 
 <div style="text-align: center; display: flex; flex-direction: column; margin: 0 300px;">
 {{> navbarPartial}}
 
+{{!-- READ - Call SELECT query to display Trainer information to the table (includes link to function to UPDATE/DELETE entries) --}}
 <h1 style="margin-top: 50px;">Trainers</h1>
 <table id="trainer-table" border="1" cellpadding="5">
 
-{{!-- Header section --}}
 <thead>
     <tr>
         <th><button onClick="showAddTrainer()">Add</button></th>
@@ -24,7 +27,6 @@
     </tr>
 </thead>
 
-    {{!-- Body section --}}
 <tbody>
     {{#each data}}
     <tr>
@@ -45,7 +47,7 @@
 </table>
 <br>
 
-{{!-- Form to add a trainer to the table --}}
+{{!-- CREATE - Form to add a trainer to the table --}}
 <div id="add-trainer-block" style="display: none; justify-content: center;">
 <form method="POST" id="add-trainer-form" action="/add-trainer-form">
     <fieldset>
@@ -85,7 +87,7 @@
 </form>
 </div>
 
-<!-- Form to update trainer-->
+<!-- UPDATE - Form to update trainer-->
 <div id="update-trainer-block" style="display: none; justify-content: center;">
 <form id="update-trainer-form">
     <fieldset>
@@ -93,7 +95,7 @@
         <br>
 
         <label for="trainer-ID"><strong>Trainer ID (read only): </strong></label>
-        <input name="update_id_trainer" id="update_id_trainer">
+        <input name="update_id_trainer" id="update_id_trainer" readonly>
         <br></br>
         <span>Please edit the information below:</span>
         <br><br>
@@ -127,10 +129,10 @@
         <br><br>
         <input type="submit" value="Click to Update">
     </fieldset>
-    </form><!-- update -->
+    </form>
 </div>
 
-<!-- Form to delete a Trainer-->
+<!-- DELETE - Form to delete a Trainer-->
 <div id="delete-trainer-block" style="display: none; margin: 0 auto;">
     <fieldset>
     <legend><strong>Confirm Deletion</strong></legend>
@@ -164,16 +166,12 @@
         </tr>
         </tbody>
     </table>
-
     <br>
-
     <button id="button-delete-trainer">Click to Delete</button></td>
-
     </fieldset>
-
 </div>
-<!-- delete -->
 
+<!-- Scripts -->
 <script src="./js/trainers/update_trainer.js"></script>
 <script src="./js/trainers/delete_trainer.js"></script>
 <script src="./js/trainers/add_trainer.js"></script>
