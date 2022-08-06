@@ -1,3 +1,6 @@
+//-- Code referenced heavily from Canvas Module Week 7 Project Development -Exploration – Developing in Node.js 
+//    and osu-cs340-ecampus / nodejs-starter-app : https://github.com/osu-cs340-ecampus/nodejs-starter-app 
+
 function showUpdateDHTS(id_dog, id_training_session) {
   let link = '/dhts-by-id';
   link += '?' + `id_dog=${id_dog}&id_training_session=${id_training_session}`

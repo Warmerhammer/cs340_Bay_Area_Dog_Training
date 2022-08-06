@@ -1,3 +1,6 @@
+//-- Code referenced heavily from Canvas Module Week 7 Project Development -Exploration – Developing in Node.js 
+//    and osu-cs340-ecampus / nodejs-starter-app : https://github.com/osu-cs340-ecampus/nodejs-starter-app 
+
 function showAddSessionTypes() {
   document.getElementById("add-session-type-block").style.display = 'block';
   document.getElementById("delete-session-type-block").style.display = 'none';
