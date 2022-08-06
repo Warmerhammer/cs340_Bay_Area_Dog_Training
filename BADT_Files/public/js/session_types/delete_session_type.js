@@ -1,3 +1,6 @@
+//-- Code referenced heavily from Canvas Module Week 7 Project Development -Exploration – Developing in Node.js 
+//    and osu-cs340-ecampus / nodejs-starter-app : https://github.com/osu-cs340-ecampus/nodejs-starter-app 
+
 function showDeleteForm(id_session_type) {
   let link = '/session-type-by-id';
   link += '?' + `id_session_type=${id_session_type}`

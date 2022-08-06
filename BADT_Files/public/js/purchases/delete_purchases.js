@@ -1,3 +1,5 @@
+//-- Code referenced heavily from Canvas Module Week 7 Project Development -Exploration – Developing in Node.js 
+//    and osu-cs340-ecampus / nodejs-starter-app : https://github.com/osu-cs340-ecampus/nodejs-starter-app 
 
 function showDeletePurchases(id_purchase, quantity, id_customer, id_package) {
     let link = '/purchases-by-id';

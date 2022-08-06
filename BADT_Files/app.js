@@ -1,3 +1,7 @@
+//-- Code referenced heavily from Canvas Module Week 7 Project Development -Exploration – Developing in Node.js 
+//    and osu-cs340-ecampus / nodejs-starter-app : https://github.com/osu-cs340-ecampus/nodejs-starter-app 
+// Additional citations have been noted below with with relevent code.
+
 // SETUP
 
 //Initialize modules
@@ -64,6 +68,34 @@ app.get('/Dogs', function (req, res) {
             })
 
             res.render('Dogs', { data: dogs, customers: customers });
+        })
+    })
+});
+
+app.get('/dog-by-id', function (req, res) {
+    let dogID = parseInt(req.query.id_dog);
+    let query1 = "SELECT * FROM Dogs WHERE id_dog = ?";
+    let query2 = "SELECT * FROM Customers"
+    db.pool.query(query1, [dogID], function (error, rows, fields) {
+        let dogs = rows;
+        db.pool.query(query2, (err, row, field) => {
+            let customers = row;
+            let customermap = {};
+            customers.map(customer => {
+                let id = parseInt(customer.id_customer, 10)
+                customermap[id] = customer["name"];
+            })
+
+            dogs = dogs.map(dog => {
+                let vaccinated = "No"
+                if (dog["fully_vaccinated"] == 1) {
+                    vaccinated = "Yes"
+                }
+                return Object.assign(dog, { vaccinated: vaccinated }, { customer: customermap[dog.id_customer] })
+            })
+
+
+            res.send({ data: dogs, customers: customers });
         })
     })
 });
@@ -168,6 +200,7 @@ app.get('/dhts-by-id', function (req, res) {
 
 });
 
+
 app.get('/thts-by-id', function (req, res) {
     let trainerID = parseInt(req.query.id_trainer);
     let trainingSession = parseInt(req.query.id_training_session);
@@ -199,6 +232,19 @@ app.get('/Packages', function (req, res) {
             res.render('Packages', { data: packages, session_types });
         })
     });
+});
+
+app.get('/package-by-id', function (req, res) {
+    let packageID = parseInt(req.query.id_package);
+    let query1 = "SELECT * FROM Packages WHERE id_package = ?";
+    let query2 = "SELECT * FROM Session_Types"
+    db.pool.query(query1, [packageID], function (error, rows, fields) {
+        let packages = rows;
+        db.pool.query(query2, (err, row, field) => {
+            let session_types = row;
+            res.send({ data: packages, session_types });
+        })
+    })
 });
 
 app.get('/Purchases', function (req, res) {
@@ -241,11 +287,29 @@ app.get('/Session_Types', function (req, res) {
     })
 });
 
+app.get('/session-type-by-id', function (req, res) {
+    let sessionTypeID = req.query.id_session_type;
+    let query1 = "SELECT * FROM Session_Types WHERE id_session_type = ?";
+    db.pool.query(query1, [sessionTypeID], function (error, rows, fields) {
+        let session_type = rows;
+        res.send({ data: session_type });
+    })
+});
+
 app.get('/Trainers', function (req, res) {
     let query1 = "SELECT * FROM Trainers;";
     db.pool.query(query1, function (error, rows, fields) {
         res.render('Trainers', { data: rows });
     });
+});
+
+app.get('/trainer-by-id', function (req, res) {
+    let trainerID = parseInt(req.query.id_trainer);
+    let query1 = "SELECT * FROM Trainers WHERE id_trainer = ?";
+    db.pool.query(query1, [trainerID], function (error, rows, fields) {
+        let trainer = rows;
+        res.send({ data: trainer });
+    })
 });
 
 app.get('/Trainer_has_Training_Session', function (req, res) {
@@ -295,6 +359,19 @@ app.get('/Trainer_has_Training_Session', function (req, res) {
     })
 });
 
+app.get('/thts-by-id', function (req, res) {
+    let trainerID = parseInt(req.query.id_trainer);
+    let trainingSession = parseInt(req.query.id_training_session);
+    let query1 = `SELECT * FROM Trainer_Has_Training_Sessions WHERE id_trainer = ${trainerID} AND id_training_session = ${trainingSession}`;
+    db.pool.query(query1, function (error, rows, fields) {
+        if (error) {
+            console.log(error)
+        }
+        let data = rows;
+            res.send({ data: data});
+    })
+});
+
 app.get('/Training_Sessions', function (req, res) {
     let query1 = "SELECT * FROM Training_Sessions;";
     let query2 = "SELECT * FROM Session_Types";
@@ -306,66 +383,6 @@ app.get('/Training_Sessions', function (req, res) {
         })
 
     });
-});
-
-app.get('/trainer-by-id', function (req, res) {
-    let trainerID = parseInt(req.query.id_trainer);
-    let query1 = "SELECT * FROM Trainers WHERE id_trainer = ?";
-    db.pool.query(query1, [trainerID], function (error, rows, fields) {
-        let trainer = rows;
-        res.send({ data: trainer });
-    })
-
-});
-
-app.get('/dog-by-id', function (req, res) {
-    let dogID = parseInt(req.query.id_dog);
-    let query1 = "SELECT * FROM Dogs WHERE id_dog = ?";
-    let query2 = "SELECT * FROM Customers"
-    db.pool.query(query1, [dogID], function (error, rows, fields) {
-        let dogs = rows;
-        db.pool.query(query2, (err, row, field) => {
-            let customers = row;
-            let customermap = {};
-            customers.map(customer => {
-                let id = parseInt(customer.id_customer, 10)
-                customermap[id] = customer["name"];
-            })
-
-            dogs = dogs.map(dog => {
-                let vaccinated = "No"
-                if (dog["fully_vaccinated"] == 1) {
-                    vaccinated = "Yes"
-                }
-                return Object.assign(dog, { vaccinated: vaccinated }, { customer: customermap[dog.id_customer] })
-            })
-
-
-            res.send({ data: dogs, customers: customers });
-        })
-    })
-});
-
-app.get('/package-by-id', function (req, res) {
-    let packageID = parseInt(req.query.id_package);
-    let query1 = "SELECT * FROM Packages WHERE id_package = ?";
-    let query2 = "SELECT * FROM Session_Types"
-    db.pool.query(query1, [packageID], function (error, rows, fields) {
-        let packages = rows;
-        db.pool.query(query2, (err, row, field) => {
-            let session_types = row;
-            res.send({ data: packages, session_types });
-        })
-    })
-});
-
-app.get('/session-type-by-id', function (req, res) {
-    let sessionTypeID = req.query.id_session_type;
-    let query1 = "SELECT * FROM Session_Types WHERE id_session_type = ?";
-    db.pool.query(query1, [sessionTypeID], function (error, rows, fields) {
-        let session_type = rows;
-        res.send({ data: session_type });
-    })
 });
 
 app.get('/training-session-by-id', function (req, res) {

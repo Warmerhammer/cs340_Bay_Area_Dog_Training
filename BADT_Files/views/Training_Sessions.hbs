@@ -1,13 +1,14 @@
+{{!-- Code referenced heavily from Canvas Module Week 7 Project Development -Exploration – Developing in Node.js 
+and osu-cs340-ecampus / nodejs-starter-app : https://github.com/osu-cs340-ecampus/nodejs-starter-app --}}
+
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <div style="text-align: center; display: flex; flex-direction: column; margin: 0 300px;">
+{{>navbarPartial}}
+<h1 style="margin-top: 50px;">Training Sessions</h1>
 
-  {{>navbarPartial}}
-
-
-  <h1 style="margin-top: 50px;">Training Sessions</h1>
+{{!-- READ - Call SELECT query to display Training Session information to the table (includes link to function to CREATE/UPDATE/DELETE entries) --}}
   <table border="1" cellpadding="5">
-    {{!-- Header section --}}
     <thead>
       <tr>
         <th><button onclick="showAddTrainingSession()">Add</button></th>
@@ -15,12 +16,8 @@
         {{#each data.[0]}}
         <th>{{@key}}</th>
         {{/each}}
-        <th>
-          update
-        </th>
-        <th>
-          delete
-        </th>
+        <th>update</th>
+        <th>delete</th>
       </tr>
     </thead>
 
@@ -37,8 +34,10 @@
       </tr>
       {{/each}}
     </tbody>
-  </table> <!-- browse -->
+  </table> 
   <br><br>
+  
+  {{!-- CREATE - Form to add a training session to the table --}}
   <div id="add-training-session-block" style="justify-content: center;">
     <form method="POST" id="add-training-session-form">
       <fieldset class="fields">
@@ -60,10 +59,9 @@
         <br>
       </fieldset>
     </form>
-    <!--add new training session-->
-  </div><!-- insert -->
+  </div>
 
-  <!-- update -->
+<!-- UPDATE - Form to update training sessions-->
   <div id="update-training-session-block" style="display: none; justify-content: center;">
     <form id="update-training-session-form">
       <fieldset>
@@ -85,16 +83,13 @@
       </fieldset>
     </form>
   </div>
-  <!-- update -->
 
-  <!-- delete -->
+<!-- DELETE - Form to delete training sessions-->
   <div id="delete-training-session-block" style="display: none; justify-content: center;">
     <fieldset>
       <legend><strong>Confirm Deletion</strong></legend>
       <br>
       <table id="delete-training-session-table" border="1" cellpadding="5">
-
-        {{!-- Header section --}}
         <thead>
           <tr>
             <th>id_training_session</th>
@@ -113,17 +108,13 @@
           </tr>
         </tbody>
       </table>
-
       <br>
-
       <button id="button-delete-training-session">Click to Delete</button></td>
-
     </fieldset>
-
   </div>
-  <!-- delete -->
 </div>
 
+<!-- Scripts -->
 <script src="./js/training_sessions/add_training_session.js"></script>
 <script src="./js/training_sessions/update_training_session.js"></script>
 <script src="./js/training_sessions/delete_training_session.js"></script>

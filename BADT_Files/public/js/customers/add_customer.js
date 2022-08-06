@@ -1,68 +1,12 @@
+//-- Code referenced heavily from Canvas Module Week 7 Project Development - Exploration – Developing in Node.js 
+//    and osu-cs340-ecampus / nodejs-starter-app : https://github.com/osu-cs340-ecampus/nodejs-starter-app 
+
 function showAddForm() {
     document.getElementById("add-customer-form").style.display = "block";
     document.getElementById("update-customer-form-ajax").style.display = "none";
 }
 
-// // Get the objects we need to modify
-// let addCustomerForm = document.getElementById('add-customer-form-ajax');
-
-// // Modify the objects we need
-// addCustomerForm.addEventListener("submit", function (e) {
-
-//     // Prevent the form from submitting
-//     e.preventDefault();
-
-//     // Get form fields we need to get data from
-//     let inputName = document.getElementById("input-name");
-//     let inputEmail = document.getElementById("input-email");
-//     let inputPhoneNumber = document.getElementById("input-phone-number");
-//     let inputDogsEnrolled = document.getElementById("input-dogs-enrolled");
-
-//     // Get the values from the form fields
-//     let nameValue = inputName.value;
-//     let emailValue = inputEmail.value;
-//     let phoneNmberValue = inputPhoneNumber.value;
-//     let dogsEnrolledValue = inputDogsEnrolled.value;
-
-//     // Put our data we want to send in a javascript object
-//     let data = {
-//         name: nameValue,
-//         email: emailValue,
-//         phone_number: phoneNmberValue,
-//         number_of_dogs_enrolled: dogsEnrolledValue
-//     }
-
-//     // Setup our AJAX request
-//     var xhttp = new XMLHttpRequest();
-//     xhttp.open("POST", "/add-customer-ajax", true);
-//     xhttp.setRequestHeader("Content-type", "application/json");
-
-//     // Tell our AJAX request how to resolve
-//     xhttp.onreadystatechange = () => {
-//         if (xhttp.readyState == 4 && xhttp.status == 200) {
-
-//             // Add the new data to the table
-//             addRowToTable(xhttp.response);
-
-//             // Clear the input fields for another transaction
-//             inputName.value = '';
-//             inputEmail.value = '';
-//             inputPhoneNumber.value = '';
-//             inputDogsEnrolled.value = '';
-//         }
-//         else if (xhttp.readyState == 4 && xhttp.status != 200) {
-//             console.log("There was an error with the input.")
-//         }
-//     }
-
-//     // Send the request and wait for the response
-//     xhttp.send(JSON.stringify(data));
-
-// })
-
-
-// Creates a single row from an Object representing a single record from 
-// bsg_people
+// Creates a single row from an Object representing a single record from table
 addRowToTable = (data) => {
 
     // Get a reference to the current table on the page and clear it out.

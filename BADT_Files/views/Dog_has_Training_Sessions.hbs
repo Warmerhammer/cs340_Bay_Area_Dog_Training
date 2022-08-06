@@ -1,9 +1,12 @@
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+{{!-- Code referenced heavily from Canvas Module Week 7 Project Development -Exploration – Developing in Node.js 
+and osu-cs340-ecampus / nodejs-starter-app : https://github.com/osu-cs340-ecampus/nodejs-starter-app --}}
 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <div style="text-align: center; display: flex; flex-direction: column; margin: 0 300px;">
   {{>navbarPartial}}
 
+  {{!-- READ - Call SELECT query to display dog has training sessions information to the table --}}
   <h1 style="margin-top: 50px;">Dog Training Sessions (intersection table) </h1>
   <table border="1" cellpadding="5">
     <thead>
@@ -16,17 +19,10 @@
         <th>id_training_session</th>
         <th>date_scheduled</th>
         <th>session_type</th>
-        <th>
-        </th>
-        <th>
-          customer_feedback
-        </th>
-        <th>
-          edit feedback
-        </th>
-        <th>
-          remove dog from session
-        </th>
+        <th></th>
+        <th>customer_feedback</th>
+        <th>edit feedback</th>
+        <th>remove dog from session</th>
       </tr>
     </thead>
 
@@ -50,7 +46,7 @@
     </tbody>
   </table>
   
-  <!-- add a new dog training session -->
+  {{!-- CREATE - Form to add a dog has training sesion entry to the table --}}
   <p>&nbsp;</p>
 
   <div id="add-dhts-block" style="justify-content: center;">
@@ -93,7 +89,7 @@
     </form>
   </div>
   
-  <!-- update a new dog training session -->
+  {{!-- UPDATE - update a new dog has training session entry--}}
   <div id="update-dhts-block" style="display: none;">
     <form method="POST" id="update-dhts-form">
       <fieldset>
@@ -117,8 +113,7 @@
     </fieldset>
   </div>
   
-  <!-- delete -->
-
+   {{!-- DELETE - delete a dog training has session entry--}}
   <div id="delete-dhts-block" style="display: none; margin: 0 auto;">
     <fieldset>
       <legend>Confirm Deletion</legend>
@@ -160,9 +155,9 @@
     </fieldset>
   </div>
 </div>
-
 </body>
 
+  <!-- Scripts -->
 <script src="./js/dhts/add_dhts.js"></script>
 <script src="./js/dhts/update_dhts.js"></script>
 <script src="./js/dhts/delete_dhts.js"></script>

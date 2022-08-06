@@ -1,25 +1,25 @@
+{{!-- Code referenced heavily from Canvas Module Week 7 Project Development -Exploration – Developing in Node.js 
+and osu-cs340-ecampus / nodejs-starter-app : https://github.com/osu-cs340-ecampus/nodejs-starter-app --}}
+
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 
 <div style="text-align: center; display: flex; flex-direction: column; margin: 0 300px;">
-
 {{> navbarPartial}}
-
 <h1 style="margin-top: 50px;">Purchases</h1>
+
+{{!-- READ - Call SELECT query to display Purchases information to the table (includes link to function to DELETE purchases entry) --}}
 <table id="thts-table" border="1" cellpadding="5">
-{{!-- Header section --}}
 <thead>
     <tr>
         <th><button onClick="showAddPurchase()">Add</button></th>
             {{#each data.[0]}}
             <th>{{@key}}</th>
             {{/each}}
-            <th>Update Information</th>
             <th>Delete</th>
     </tr>
 </thead>
 
-{{!-- Body section --}}
 <tbody>
 {{#each data}}
 <tr>
@@ -28,14 +28,13 @@
     <td>{{this.quantity}}</td>
     <td>{{this.id_customer}}</td>
     <td>{{this.id_package}}</td>
-    <td><button onClick="update()">Update Information</button></td>
     <td><button onClick="showDeletePurchases({{this.id_purchase}}, {{this.quantity}}, {{this.id_customer}}, {{this.id_package}})">Delete</button></td>
 </tr>
 {{/each}}
 </tbody>
 </table>
 
-<!-- Add a new Purchase -->
+{{!-- CREATE - Form to add a Purchase entry to the table --}}
 <div id="add-purchases-block" style="display: none; justify-content: center;">
 <form method="POST" id="add-purchases-form">
 <fieldset>
@@ -71,8 +70,7 @@
 </form>
 </div>
 
-<!-- Delete a Purchase-->
-
+{{!-- DELETE - Form to add a Purchase entry to the table --}}
 <div id="delete-purchases-block" style="display: none; justify-content: center;">
 <fieldset>
     <legend><strong>Confirm Deletion</legend>
@@ -97,14 +95,12 @@
         <td id="td-delete-purchases-id-package"></td>
         </tr>
     </tbody>
-    
     </table>
-    
     <br><br>
-    
     <button type="submit" id="button-purchases-delete">Click to Delete</button>
 </fieldset>
 </div>
 
+<!-- Scripts -->
 <script src="./js/purchases/add_purchases.js"></script>
 <script src="./js/purchases/delete_purchases.js"></script>

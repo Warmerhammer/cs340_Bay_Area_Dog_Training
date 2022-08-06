@@ -1,3 +1,6 @@
+//-- Code referenced heavily from Canvas Module Week 7 Project Development -Exploration – Developing in Node.js 
+//    and osu-cs340-ecampus / nodejs-starter-app : https://github.com/osu-cs340-ecampus/nodejs-starter-app 
+
 function showAddDog() {
   document.getElementById("add-dog-block").style.display = 'block';
   document.getElementById("update-dog-block").style.display = 'none';
