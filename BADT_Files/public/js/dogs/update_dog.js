@@ -1,3 +1,5 @@
+//-- Code referenced heavily from Canvas Module Week 7 Project Development -Exploration – Developing in Node.js 
+//    and osu-cs340-ecampus / nodejs-starter-app : https://github.com/osu-cs340-ecampus/nodejs-starter-app 
 
 // Get the objects we need to modify
 let updateDogForm = document.getElementById('update-dog-form');

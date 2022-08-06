@@ -1,12 +1,12 @@
+{{!-- Code referenced heavily from Canvas Module Week 7 Project Development -Exploration – Developing in Node.js 
+and osu-cs340-ecampus / nodejs-starter-app : https://github.com/osu-cs340-ecampus/nodejs-starter-app --}}
+
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
-
-
 
 <div style="text-align: center; display: flex; flex-direction: column; margin: 0 300px;">
   {{> navbarPartial}}
-
-
+  
+  {{!-- search bar for individual dogs --}}
   <form id="search-dog" method="GET" action="/Dogs" style="text-align: center; margin-top: 50px;">
     <legend><strong>Search By Dog Name</strong></legend>
     <br>
@@ -14,13 +14,11 @@
     <br><br>
     <button id="dog-search-button" type="submit">Search</button>
     <a href="/Dogs"><button>Clear</button></a>
-
-
   </form>
-
+  
+  {{!-- READ - Call SELECT query to display dog information to the table --}}
   <h1 style="margin-top: 50px;">Dogs Table</h1>
   <table id="dog-table" border="1" cellpadding="5">
-    {{!-- Header section --}}
     <thead>
       <tr>
         <th><button onClick="showAddDog()">Add</button></th>
@@ -36,10 +34,8 @@
         <th></th>
         <th>customer</th>
       </tr>
-
     </thead>
 
-    {{!-- Body section --}}
     <tbody>
       {{#each data}}
       <tr>
@@ -62,7 +58,7 @@
 
   <br>
 
-  {{!-- Form to add a dog to the table --}}
+  {{!-- CREATE - Form to add a dog to the table --}}
   <div id="add-dog-block">
     <form id="add-dog-form">
       <fieldset>
@@ -111,7 +107,7 @@
     </form>
   </div>
 
-  <!-- update -->
+  {{!-- UPDATE - Form to update a dog to the table --}}
   <div id="update-dog-block" style="display: none; justify-content: center;">
     <form id="update-dog-form">
       <fieldset>
@@ -155,18 +151,16 @@
         <br><br>
         <input type="submit" value="Click to Update">
       </fieldset>
-    </form><!-- update -->
+    </form>
   </div>
 
-  <!-- delete -->
+  {{!-- DELETE - Form to delete a dog to the table --}}
   <div id="delete-dog-block" style="display: none; margin: 0 auto;">
     <fieldset>
       <legend><strong>Confirm Deletion</strong></legend>
       <span>Are you sure you want to delete?</span>
       <br><br>
       <table id="delete-dog-table" border="1" cellpadding="5">
-
-        {{!-- Header section --}}
         <thead>
           <tr>
             <th>customer</th>
@@ -199,8 +193,8 @@
     </fieldset>
 
   </div>
-  <!-- delete -->
-
+  
+  <!-- Scripts -->
   <script src="./js/dogs/update_dog.js"></script>
   <script src="./js/dogs/delete_dog.js"></script>
   <script src="./js/dogs/add_dog.js"></script>

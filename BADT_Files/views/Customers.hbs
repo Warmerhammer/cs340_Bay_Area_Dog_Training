@@ -1,18 +1,16 @@
+{{!-- Code referenced heavily from Canvas Module Week 7 Project Development -Exploration – Developing in Node.js 
+and osu-cs340-ecampus / nodejs-starter-app : https://github.com/osu-cs340-ecampus/nodejs-starter-app --}}
+
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <div style="text-align: center; display: flex; flex-direction: column; margin: 0 300px;">
-
-
     {{> navbarPartial}}
 
     <h1 style="margin-top: 50px;">Customers</h1>
-    {{!-- Create a table --}}
+  
+    {{!-- READ - Call SELECT query to display dog information to the table (includes link to function to DELETE Customer) --}}
     <table id="customer-table" border="1" cellpadding="5">
-
-        {{!-- Header section --}}
         <thead>
-
-            {{!-- For just the first row, we print each key --}}
             <tr>
                 <th><Button onClick="showAddForm()">Add</Button></th>
                 <th></th>
@@ -22,13 +20,9 @@
                 <th>update</th>
                 <th>delete</th>
             </tr>
-
         </thead>
 
-        {{!-- Body section --}}
         <tbody>
-
-            {{!-- For each row, print the id, name, email, phone number and number of dogs enrolled, in order --}}
             {{#each data}}
             <tr>
                 <td></td>
@@ -44,12 +38,9 @@
             {{/each}}
         </tbody>
     </table>
-    <script src="./js/customers/delete_customer.js"></script>
     <p>&nbsp;</p>
 
-    <!-- /views/index.hbs -->
-
-    {{!-- Form to add a customer to the table --}}
+    {{!-- CREATE - Form to add a customer to the table --}}
     <form method="POST" id="add-customer-form" action="/add-customer-form">
         <fieldset>
             <legend><strong>Add A Customer</strong></legend>
@@ -76,6 +67,7 @@
         </fieldset>
     </form>
 
+    {{!-- UPDATE - Form to update a customer to the table --}}
     <form id="update-customer-form-ajax" style="display: none;">
         <fieldset>
             <legend><strong>Update Customer Information</strong></legend>
@@ -114,5 +106,7 @@
     </form>
 </div>
 
+  <!-- Scripts -->
+<script src="./js/customers/delete_customer.js"></script>
 <script src="./js/customers/update_customer.js"></script>
 <script src="./js/customers/add_customer.js"></script>

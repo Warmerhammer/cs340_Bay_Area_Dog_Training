@@ -1,12 +1,14 @@
+{{!-- Code referenced heavily from Canvas Module Week 7 Project Development -Exploration – Developing in Node.js 
+and osu-cs340-ecampus / nodejs-starter-app : https://github.com/osu-cs340-ecampus/nodejs-starter-app --}}
+
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <div style="text-align: center; display: flex; flex-direction: column; margin: 0 300px;">
-  {{>navbarPartial}}
+{{>navbarPartial}}
+<h1 style="margin-top: 50px;">Session Types</h1>
 
-  <h1 style="margin-top: 50px;">Session Types</h1>
-
+{{!-- READ - Call SELECT query to display Session Types information to the table (includes link to function to DELETE session types entry) --}}
   <table id="session-types-table" border="1" cellpadding="5">
-    {{!-- Header section --}}
     <thead>
       <tr>
         <th><button onClick="showAddPackage()">Add</button></th>
@@ -24,7 +26,6 @@
 
     </thead>
 
-    {{!-- Body section --}}
     <tbody>
       {{#each data}}
       <tr>
@@ -40,6 +41,7 @@
 
   <p>&nbsp;</p>
 
+{{!-- CREATE - Form to add a Session Types entry to the table --}}
   <div id="add-session-type-block">
     <form id="add-session-type-form">
       <fieldset>
@@ -58,8 +60,9 @@
         <button type="submit" id="button-add-session-type">Click to Add</button>
       </fieldset>
     </form>
-  </div><!-- insert -->
+  </div>
 
+{{!-- DELETE - Form to delete a Session Types entry to the table --}}
   <div id="delete-session-type-block" style="display: none; margin: auto;">
     <form id="delete-session-type-table">
       <fieldset style="text-align: center;">
@@ -89,8 +92,9 @@
         <button type="submit" id="button-delete-session-type">Click to Delete</button>
       </fieldset>
     </form>
-  </div><!-- delete -->
+  </div>
 </div>
 
+<!-- Scripts -->
 <script src="./js/session_types/add_session_type.js"></script>
 <script src="./js/session_types/delete_session_type.js"></script>
