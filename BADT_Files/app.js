@@ -23,7 +23,7 @@ app.set('view engine', 'hbs');
 
 // GET ROUTES
 
-app.get('/Index', function (req, res) {
+app.get('/', function (req, res) {
     res.render('Index');
 });
 
@@ -177,7 +177,7 @@ app.get('/thts-by-id', function (req, res) {
             console.log(error)
         }
         let data = rows;
-            res.send({ data: data});
+        res.send({ data: data });
     })
 });
 
@@ -211,7 +211,7 @@ app.get('/Purchases', function (req, res) {
             let customers = rows;
             db.pool.query(query3, function (err, rows, fields) {
                 let packages = rows;
-            res.render('Purchases', { data: data, customers, packages });
+                res.render('Purchases', { data: data, customers, packages });
             })
         });
     });
@@ -229,7 +229,7 @@ app.get('/purchases-by-id', function (req, res) {
             console.log(error)
         }
         let data = rows;
-            res.send({ data: data});
+        res.send({ data: data });
     })
 });
 
@@ -564,7 +564,7 @@ app.post('/add-purchase', function (req, res) {
             '${data['id_customer']}',
             '${data['id_package']}'
             );`
-    
+
     db.pool.query(insertQuery, function (error, rows, fields) {
         if (error) {
             console.log(error);
@@ -652,7 +652,7 @@ app.delete('/delete-trainer', function (req, res, next) {
     let data = req.body;
     let trainerID = parseInt(data.id_trainer);
     let deleteTrainer = `DELETE FROM Trainers WHERE id_trainer = ?`;
-    
+
     db.pool.query(deleteTrainer, [trainerID], function (error, rows, fields) {
         if (error) {
 
@@ -866,16 +866,16 @@ app.put('/update-trainer', function (req, res) {
                             preferred_schedule = '${data['preferred_schedule']}'
                         WHERE id_trainer = '${trainerID}'
                         ;`
-    
-        db.pool.query(queryTrainer, function (error, rows, fileds) {
-            if (error) {
-                // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
-                console.log(error);
-                res.sendStatus(400);
-            }
-            else {
-                res.send(rows);
-            }
+
+    db.pool.query(queryTrainer, function (error, rows, fileds) {
+        if (error) {
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error);
+            res.sendStatus(400);
+        }
+        else {
+            res.send(rows);
+        }
     })
 });
 
@@ -1001,5 +1001,5 @@ app.put('/update-package', function (req, res) {
 // LISTENER
 
 app.listen(PORT, function () {
-    console.log(`Express started on http://localhost:${PORT}/Index; press Ctrl-C to terminate.`)
+    console.log(`Express started on http://localhost:${PORT}; press Ctrl-C to terminate.`)
 });  
