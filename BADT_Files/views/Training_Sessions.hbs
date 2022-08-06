@@ -1,13 +1,14 @@
-{{!-- Code referenced heavily from Canvas Module Week 7 Project Development -Exploration – Developing in Node.js 
+{{!-- Code referenced heavily from Canvas Module Week 7 Project Development -Exploration – Developing in Node.js
 and osu-cs340-ecampus / nodejs-starter-app : https://github.com/osu-cs340-ecampus/nodejs-starter-app --}}
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <div style="text-align: center; display: flex; flex-direction: column; margin: 0 300px;">
-{{>navbarPartial}}
-<h1 style="margin-top: 50px;">Training Sessions</h1>
+  {{>navbarPartial}}
+  <h1 style="margin-top: 50px;">Training Sessions</h1>
 
-{{!-- READ - Call SELECT query to display Training Session information to the table (includes link to function to CREATE/UPDATE/DELETE entries) --}}
+  {{!-- READ - Call SELECT query to display Training Session information to the table (includes link to function to
+  CREATE/UPDATE/DELETE entries) --}}
   <table border="1" cellpadding="5">
     <thead>
       <tr>
@@ -34,9 +35,9 @@ and osu-cs340-ecampus / nodejs-starter-app : https://github.com/osu-cs340-ecampu
       </tr>
       {{/each}}
     </tbody>
-  </table> 
+  </table>
   <br><br>
-  
+
   {{!-- CREATE - Form to add a training session to the table --}}
   <div id="add-training-session-block" style="justify-content: center;">
     <form method="POST" id="add-training-session-form">
@@ -61,30 +62,34 @@ and osu-cs340-ecampus / nodejs-starter-app : https://github.com/osu-cs340-ecampu
     </form>
   </div>
 
-<!-- UPDATE - Form to update training sessions-->
+  <!-- UPDATE - Form to update training sessions-->
   <div id="update-training-session-block" style="display: none; justify-content: center;">
     <form id="update-training-session-form">
       <fieldset>
         <legend><strong>Update Training Session</strong></legend>
+
+        <label for="input-id-training-session"><strong>Training Session ID (Read Only): </strong></label>
+        <br>
+        <input type="number" name="input-id-training-session" id="input-id-training-session" readonly>
+        <br><br>
         <br>
         <span>Please edit the info. below:</span>
         <br><br>
-        <label for="input-id-training-session"><strong>Training Session ID (Read Only): </strong></label>
-        <input type="number" name="input-id-training-session" id="input-id-training-session" readonly>
-
         <label for="input-date-scheduled"><strong>Date (yyyy-mm-dd hh:mm:ss): </strong></label>
+        <br>
         <input name="input-date-scheduled" id="input-date-scheduled" type="text">
-
+        <br><br>
         <label for="input-id-session-type"><strong>Session Type: </strong></label>
+        <br>
         <select name="input-id-session-type" id="input-id-session-type"></select>
 
-        <br><br>
+        <br><br><br>
         <input type="submit" value="Update Training Session">
       </fieldset>
     </form>
   </div>
 
-<!-- DELETE - Form to delete training sessions-->
+  <!-- DELETE - Form to delete training sessions-->
   <div id="delete-training-session-block" style="display: none; justify-content: center;">
     <fieldset>
       <legend><strong>Confirm Deletion</strong></legend>

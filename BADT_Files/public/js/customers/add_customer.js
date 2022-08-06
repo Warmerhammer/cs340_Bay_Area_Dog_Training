@@ -4,6 +4,7 @@
 function showAddForm() {
     document.getElementById("add-customer-form").style.display = "block";
     document.getElementById("update-customer-form-ajax").style.display = "none";
+    document.getElementById("delete-customer-block").style.display = "none";
 }
 
 // Creates a single row from an Object representing a single record from table

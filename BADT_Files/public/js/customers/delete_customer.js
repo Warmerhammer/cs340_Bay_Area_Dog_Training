@@ -2,6 +2,33 @@
 //    and osu-cs340-ecampus / nodejs-starter-app : https://github.com/osu-cs340-ecampus/nodejs-starter-app 
 
 // code for deletePerson function using jQuery
+function showDeleteForm(id_customer) {
+    let link = '/customer-by-id';
+    link += '?' + `id_customer=${id_customer}`
+
+    $.ajax({
+        url: link,
+        type: 'GET',
+        contentType: "application/json; charset=utf-8",
+        success: function (response) {
+            let data = response.data[0];
+
+            document.getElementById("delete-id-customer").innerHTML = data.id_customer;
+            document.getElementById("delete-name").innerHTML = data.name;
+            document.getElementById("delete-email").innerHTML = data.email;
+            document.getElementById("delete-phone-number").innerHTML = data.phone_number;
+
+            document.getElementById("delete-customer-block").style.display = "block";
+            document.getElementById("update-customer-form-ajax").style.display = "none";
+            document.getElementById("add-customer-form").style.display = "none";
+
+            document.getElementById("button-delete-customer").addEventListener('click', function () { deleteCustomer(data.id_customer) });
+
+        }
+    });
+}
+
+
 function deleteCustomer(id_customer) {
     let link = '/delete-customer';
     let data = {
@@ -14,22 +41,8 @@ function deleteCustomer(id_customer) {
         data: JSON.stringify(data),
         contentType: "application/json; charset=utf-8",
         success: function (result) {
-            deleteRow(id_customer);
+            alert("Successful Deletion!")
+            location.reload()
         }
     });
-}
-
-
-function deleteRow(id_customer) {
-    let table = document.getElementById("customer-table");
-    console.log('id_customer: ', id_customer)
-    for (let i = 0, row; row = table.rows[i]; i++) {
-        //iterate through rows
-        //rows would be accessed using the "row" variable assigned in the for loop
-        if (table.rows[i].getAttribute("data-value") == id_customer) {
-            table.deleteRow(i);
-            break;
-        }
-    }
-    location.reload()
 }

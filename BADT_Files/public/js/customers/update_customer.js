@@ -4,6 +4,7 @@
 function showUpdateCustomer() {
     document.getElementById("update-customer-form-ajax").style.display = "block";
     document.getElementById("add-customer-form").style.display = "none";
+    document.getElementById("delete-customer-block").style.display = "none";
 }
 
 // Get the objects we need to modify

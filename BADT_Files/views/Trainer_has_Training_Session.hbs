@@ -1,78 +1,80 @@
-{{!-- Code referenced heavily from Canvas Module Week 7 Project Development -Exploration – Developing in Node.js 
+{{!-- Code referenced heavily from Canvas Module Week 7 Project Development -Exploration – Developing in Node.js
 and osu-cs340-ecampus / nodejs-starter-app : https://github.com/osu-cs340-ecampus/nodejs-starter-app --}}
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 
 <div style="text-align: center; display: flex; flex-direction: column; margin: 0 300px;">
-{{> navbarPartial}}
-<h1 style="margin-top: 50px;">Trainer has Training Sessions (Intersection Table)</h1>
+  {{> navbarPartial}}
+  <h1 style="margin-top: 50px;">Trainer has Training Sessions (Intersection Table)</h1>
 
-{{!-- READ - Call SELECT query to display Trainer has Training Session information to the table (includes link to function to DELETE entries) --}}
-<table id="thts-table" border="1" cellpadding="5">
-<thead>
-    <tr>
+  {{!-- READ - Call SELECT query to display Trainer has Training Session information to the table (includes link to
+  function to DELETE entries) --}}
+  <table id="thts-table" border="1" cellpadding="5">
+    <thead>
+      <tr>
         <th><button onClick="showAddThts()">Add</button></th>
-            {{#each data.[0]}}
-            <th>{{@key}}</th>
-            {{/each}}
+        {{#each data.[0]}}
+        <th>{{@key}}</th>
+        {{/each}}
         <th>delete</th>
-        
-    </tr>
-</thead>
 
-<tbody>
-    {{#each data}}
-    <tr>
+      </tr>
+    </thead>
+
+    <tbody>
+      {{#each data}}
+      <tr>
         <td></td>
         <td>{{this.id_trainer}}</td>
         <td>{{this.id_training_session}}</td>
         <td><button onClick="showDeleteTHTS({{this.id_trainer}}, {{this.id_training_session}})">Delete</button></td>
-    </tr>
-    {{/each}}
-</tbody>
-</table>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+  <p>&nbsp;</p>
 
-{{!-- CREATE - Form to add a Trainer has Training Session entry to the table --}}
-<div id="add-thts-block" style="display: none; justify-content: center;">
-  <form method="POST" id="add-thts-form">
-    <fieldset>
-      <legend><strong>Add a New Session for a Trainer</strong></legend>
-      <br>
-      <span>Please associate a trainer with the session they facilitated:</span>
-      <br><br>
-      <label for="add-thts-trainer"><strong>Trainer Name: </strong></label>
-      <br>
-      <select name="select-add-thts-trainer-name" id="select-add-thts-trainer-name">
-        <option value="select-trainer">Trainer...</option>
-        {{#each trainers}}
-        <option value="{{this.id_trainer}}">{{this.name}}</option>
-        {{/each}}
-      </select>
-      <br><br>
-      <label for="add-thts-session"><strong>Training Session:</strong></label>
-      <br>
-      <select name="select-add-thts-training-session" id="select-add-thts-training-session">
-        <option value="select-ts">Training Session...</option>
-        {{#each training_sessions}}
-        <option value="{{this.id_training_session}}">{{this.id_session_type}} : {{this.date_scheduled}}</option>
-        {{/each}}
-      </select>
-      <br><br>
-      <button type="submit">Add Session</button>
-    </fieldset>
-  </form>
-</div>
+  {{!-- CREATE - Form to add a Trainer has Training Session entry to the table --}}
+  <div id="add-thts-block" style="display: none; justify-content: center;">
+    <form method="POST" id="add-thts-form">
+      <fieldset>
+        <legend><strong>Add a New Session for a Trainer</strong></legend>
+        <br>
+        <span>Please associate a trainer with the session they facilitated:</span>
+        <br><br>
+        <label for="add-thts-trainer"><strong>Trainer Name: </strong></label>
+        <br>
+        <select name="select-add-thts-trainer-name" id="select-add-thts-trainer-name">
+          <option value="select-trainer">Trainer...</option>
+          {{#each trainers}}
+          <option value="{{this.id_trainer}}">{{this.name}}</option>
+          {{/each}}
+        </select>
+        <br><br>
+        <label for="add-thts-session"><strong>Training Session:</strong></label>
+        <br>
+        <select name="select-add-thts-training-session" id="select-add-thts-training-session">
+          <option value="select-ts">Training Session...</option>
+          {{#each training_sessions}}
+          <option value="{{this.id_training_session}}">{{this.id_session_type}} : {{this.date_scheduled}}</option>
+          {{/each}}
+        </select>
+        <br><br>
+        <button type="submit">Add Session</button>
+      </fieldset>
+    </form>
+  </div>
 
-{{!-- DELETE - Form to delete a Trainer has Training Session entry from the table --}}
-<div id="delete-thts-block" style="display: none; justify-content: center;">
+  {{!-- DELETE - Form to delete a Trainer has Training Session entry from the table --}}
+  <div id="delete-thts-block" style="display: none; justify-content: center;">
     <fieldset>
       <legend><strong>Confirm Deletion</legend>
       <br>
       <span>Are you sure you want to delete?</span>
       <br><br>
       <table id="delete-thts-table" border="1" cellpadding="5" style="margin: 0 auto">
-        
+
         <thead>
           <tr>
             <th>id_trainer</th>
@@ -89,8 +91,8 @@ and osu-cs340-ecampus / nodejs-starter-app : https://github.com/osu-cs340-ecampu
       <br><br>
       <button type="submit" id="button-thts-delete">Click to Delete</button>
     </fieldset>
-</div>
+  </div>
 
-<!-- Scripts -->
-<script src="./js/thts/add_thts.js"></script>
-<script src="./js/thts/delete_thts.js"></script>
+  <!-- Scripts -->
+  <script src="./js/thts/add_thts.js"></script>
+  <script src="./js/thts/delete_thts.js"></script>

@@ -1,4 +1,4 @@
-{{!-- Code referenced heavily from Canvas Module Week 7 Project Development -Exploration – Developing in Node.js 
+{{!-- Code referenced heavily from Canvas Module Week 7 Project Development -Exploration – Developing in Node.js
 and osu-cs340-ecampus / nodejs-starter-app : https://github.com/osu-cs340-ecampus/nodejs-starter-app --}}
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -7,8 +7,9 @@ and osu-cs340-ecampus / nodejs-starter-app : https://github.com/osu-cs340-ecampu
     {{> navbarPartial}}
 
     <h1 style="margin-top: 50px;">Customers</h1>
-  
-    {{!-- READ - Call SELECT query to display dog information to the table (includes link to function to DELETE Customer) --}}
+
+    {{!-- READ - Call SELECT query to display dog information to the table (includes link to function to DELETE
+    Customer) --}}
     <table id="customer-table" border="1" cellpadding="5">
         <thead>
             <tr>
@@ -33,7 +34,7 @@ and osu-cs340-ecampus / nodejs-starter-app : https://github.com/osu-cs340-ecampu
                 <td>{{this.phone_number}}</td>
                 <td>{{this.number_of_dogs_enrolled}}</td>
                 <td><button onClick="showUpdateCustomer()">Update</button></td>
-                <td><button onClick="deleteCustomer({{this.id_customer}})">Delete</button></td>
+                <td><button onClick="showDeleteForm({{this.id_customer}})">Delete</button></td>
             </tr>
             {{/each}}
         </tbody>
@@ -47,22 +48,24 @@ and osu-cs340-ecampus / nodejs-starter-app : https://github.com/osu-cs340-ecampu
             <br>
             <span>To add a new customer, please enter their information below and click 'Add Customer'</span>
             <br><br>
-            <label for="input-name">Name: </label>
+            <label for="input-name"><strong>Name: </strong></label>
             <br>
             <input type="text" name="input-name" id="input-name">
             <br><br>
-            <label for="input-email">Email: </label>
+            <label for="input-email"><strong>Email: </strong></label>
             <br>
             <input type="text" name="input-email" id="input-email">
             <br><br>
-            <label for="input-phone-number">Phone Number: </label>
+            <label for="input-phone-number"><strong>Phone Number:</strong></label>
             <br>
             <input type="text" name="input-phone-number" id="input-phone-number">
             <br><br>
-            <label for="input-dogs-enrolled">Dogs Enrolled: </label>
+            <label for="input-dogs-enrolled">
+                <strong>Dogs Enrolled: </strong>
+            </label>
             <br>
             <input type="number" name="input-dogs-enrolled" id="input-dogs-enrolled">
-            <br><br>
+            <br><br><br>
             <input type="submit" value="Click to Add">
         </fieldset>
     </form>
@@ -85,28 +88,63 @@ and osu-cs340-ecampus / nodejs-starter-app : https://github.com/osu-cs340-ecampu
 
             <br><br>
 
-            <label for="input-name-update">Name: </label>
+            <label for="input-name-update"><strong>Name: </strong></label>
             <br>
             <input type="text" name="input-name-update" id="input-name-update">
             <br><br>
-            <label for="input-email-update">Email: </label>
+            <label for="input-email-update"><strong>Email: </strong></label>
             <br>
             <input type="text" name="input-email-update" id="input-email-update">
             <br><br>
-            <label for="input-phone-number-update">Phone Number: </label>
+            <label for="input-phone-number-update"><strong>Phone Number: </strong></label>
             <br>
             <input type="text" name="input-phone-number-update" id="input-phone-number-update">
             <br><br>
-            <label for="input-dogs-enrolled-update">Dogs Enrolled: </label>
+            <label for="input-dogs-enrolled-update"><strong>Dogs Enrolled: </strong></label>
             <br>
             <input type="number" name="input-dogs-enrolled-update" id="input-dogs-enrolled-update">
-            <br><br>
+            <br><br><br>
             <input type="submit" value="Update Customer">
         </fieldset>
     </form>
+
+
+    {{!-- DELETE - Form to delete a dog to the table --}}
+    <div id="delete-customer-block" style="display: none; margin: 0 auto;">
+        <fieldset>
+            <legend><strong>Confirm Deletion</strong></legend>
+            <span>Are you sure you want to delete?</span>
+            <br><br>
+            <table id="customer-table" border="1" cellpadding="5">
+                <thead>
+                    <tr>
+                        <th>id_customer</th>
+                        <th>name</th>
+                        <th>email</th>
+                        <th>phone_number</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td id="delete-id-customer"></td>
+                        <td id="delete-name"></td>
+                        <td id="delete-email"></td>
+                        <td id="delete-phone-number"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <br>
+
+            <button id="button-delete-customer">Click to Delete</button></td>
+
+        </fieldset>
+
+    </div>
 </div>
 
-  <!-- Scripts -->
+<!-- Scripts -->
 <script src="./js/customers/delete_customer.js"></script>
 <script src="./js/customers/update_customer.js"></script>
 <script src="./js/customers/add_customer.js"></script>

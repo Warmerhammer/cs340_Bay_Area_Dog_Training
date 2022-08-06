@@ -38,6 +38,14 @@ app.get('/Customers', function (req, res) {
     });
 });
 
+app.get('/customer-by-id', function (req, res) {
+    let customerID = parseInt(req.query.id_customer)
+    let query1 = "SELECT * FROM Customers WHERE id_customer = ?;";
+    db.pool.query(query1, [customerID], function (error, rows, fields) {
+        res.send({ data: rows });
+    });
+});
+
 app.get('/Dogs', function (req, res) {
     let query1;
     if (req.query.dname === undefined || req.query.dname === "") {
@@ -313,8 +321,8 @@ app.get('/trainer-by-id', function (req, res) {
 });
 
 app.get('/Trainer_has_Training_Session', function (req, res) {
-    let query1 = "SELECT * FROM Trainer_Has_Training_Sessions;";
-    let query2 = "SELECT * FROM Training_Sessions;";
+    let query1 = "SELECT * FROM Trainer_Has_Training_Sessions;"
+    let query2 = "SELECT * FROM Training_Sessions;"
     let query3 = "SELECT * FROM Trainers;"
     // Run the 1st query
     db.pool.query(query1, function (error, rows, fileds) {
@@ -368,7 +376,7 @@ app.get('/thts-by-id', function (req, res) {
             console.log(error)
         }
         let data = rows;
-            res.send({ data: data});
+        res.send({ data: data });
     })
 });
 
